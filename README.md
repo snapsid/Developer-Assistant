@@ -1,11 +1,10 @@
 # Develop Assistant
 
+![Develop Assistant](https://github.com/mrsarthak001/Developer-Assistant/blob/main/docs/DA.gif)
 
 Our aim is to develop an assistant that works upon voice or text based
 commands which helps the developer to upload/configure or launch the
 services like AWS, Docker, GitHub, SQL and other applications in one go.
-
-[![Develop Assistant](https://github.com/mrsarthak001/Developer-Assistant/blob/main/docs/DA.gif)
 
 ## Abstract
 
