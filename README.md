@@ -41,5 +41,5 @@ The contribution guidelines are present [here](docs/CONTRIBUTING.md)
 
 ---
 
-The project is licensed under [GNU General Public License](LICENSE) 
+The project is licensed under [MIT License](LICENSE) 
 
