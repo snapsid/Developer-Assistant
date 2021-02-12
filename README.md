@@ -1,6 +1,6 @@
 # Develop Assistant
 
-![Develop Assistant](https://github.com/mrsarthak001/Developer-Assistant/blob/main/docs/DA.gif)
+![Develop Assistant](https://github.com/mrsarthak001/Developer-Assistant/blob/master/docs/DA.gif)
 
 Our aim is to develop an assistant that works upon voice or text based
 commands which helps the developer to upload/configure or launch the
