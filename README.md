@@ -26,12 +26,9 @@ assistant that we’ve named Developer Assistant. It will perform all tasks like
 ***Keyword :*** *learning commands, Google Assistant, configure,
 update, launch, text or voice input.*
 
+# Workflow
+![](https://github.com/mrsarthak001/Developer-Assistant/blob/master/docs/devAssist(1).png)
 
-## Contributors
-
-1. [Sarthak Jain](https://github.com/mrsarthak001)
-2. [Siddharth Chopra](https://github.com/snapsid)
-3. [Manvi Kulshrestha](https://github.com/Manvikul)
 ---
 
 Full documentation of the project is available under [Project Synopsis](Synopsis_Report/SynopsisReport.pdf)
