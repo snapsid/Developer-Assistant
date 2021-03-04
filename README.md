@@ -41,3 +41,6 @@ The contribution guidelines are present [here](docs/CONTRIBUTING.md)
 
 The project is licensed under [MIT License](LICENSE) 
 
+-------------
+
+For the project contributions, you need to accept the following [Code of Conduct](docs/CODE_OF_CONDUCT.md)
