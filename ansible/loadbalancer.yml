@@ -1,0 +1,30 @@
+- hosts: web
+  tasks:
+
+   - name: "HTTPD CONFIGURE"
+     package:
+      name: httpd
+
+   - template:
+      dest: "/var/www/html/index.html"
+      src:  "/root/ws1/haproxy.html"
+
+   - service:
+      name: "httpd"
+      state: restarted
+
+
+- hosts: lb
+  tasks:
+
+   - name : "Configure Load balancer"
+     package:
+      name: haproxy
+
+   - template:
+       dest: "/etc/haproxy/haproxy.cfg"
+       src: "/root/ws1/haproxy.cfg"
+
+   - service:
+       name: "haproxy"
+       state: restarted
