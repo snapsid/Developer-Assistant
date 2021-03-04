@@ -1,0 +1,16 @@
+   -  package:
+        name: "httpd"
+        state: present
+   -  copy:
+         src: "/root/ws1/index.html"
+         dest: "/var/www/html"
+
+   -  service:
+          name: "httpd"
+          state: "started"
+
+   -  firewalld:
+          port: 80/tcp
+          state: enabled
+          permanent: yes
+     
