@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MyIp extends StatefulWidget {
   @override
@@ -6,6 +7,16 @@ class MyIp extends StatefulWidget {
 }
 
 class _MyIpState extends State<MyIp> {
+  var ip;
+
+  onSubmit() async {
+    var url = Uri.parse('http://192.168.1.12/');
+    var response = await http.get(url);
+    var code = response.statusCode;
+    print(code);
+    // Navigator.pushNamed(context, 'home');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +34,9 @@ class _MyIpState extends State<MyIp> {
               Container(
                 width: 300,
                 child: TextField(
+                  onChanged: (value) {
+                    ip = value;
+                  },
                   decoration: InputDecoration(
                       filled: true,
                       hintText: "Enter your IP",
@@ -44,7 +58,7 @@ class _MyIpState extends State<MyIp> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, 'home');
+                    onSubmit();
                   },
                   minWidth: 130,
                   height: 40,
