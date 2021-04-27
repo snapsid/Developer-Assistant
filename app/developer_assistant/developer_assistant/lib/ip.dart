@@ -14,17 +14,22 @@ class _MyIpState extends State<MyIp> {
           backgroundColor: Colors.teal,
         ),
         body: Container(
+          alignment: Alignment.center,
           margin: EdgeInsets.only(left: 40, right: 40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextField(
-                decoration: InputDecoration(
-                    filled: true,
-                    hintText: "Enter your IP",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    )),
+              Container(
+                width: 300,
+                child: TextField(
+                  decoration: InputDecoration(
+                      filled: true,
+                      hintText: "Enter your IP",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -38,7 +43,9 @@ class _MyIpState extends State<MyIp> {
                     'Login',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'home');
+                  },
                   minWidth: 130,
                   height: 40,
                 ),

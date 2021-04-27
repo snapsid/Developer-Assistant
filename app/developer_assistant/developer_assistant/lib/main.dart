@@ -1,4 +1,5 @@
 import 'package:developer_assistant/ip.dart';
+import 'package:developer_assistant/myhome.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,6 +8,7 @@ void main() {
     initialRoute: 'ip',
     routes: {
       'ip': (context) => MyIp(),
+      'home': (context) => MyHome(),
     },
   ));
 }
