@@ -7,6 +7,8 @@ import 'package:highlight/languages/dart.dart';
 import 'package:highlight/languages/python.dart';
 import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
+import 'package:flutter_highlight/themes/vs.dart';
+import 'package:flutter_highlight/themes/darcula.dart';
 
 class MyPython extends StatefulWidget {
   static String python_op;
@@ -16,18 +18,16 @@ class MyPython extends StatefulWidget {
 
 class _MyPythonState extends State<MyPython> {
   String ip;
-
+  Map<String, TextStyle> a = atomOneDarkTheme;
   var _codeController;
+
   @override
   Widget build(BuildContext context) {
     // final source = "void main() {\n    print(\"Hello, world!\");\n}";
     var source = 'print("hello world")';
     var finalCode = "heyyy";
     _codeController = CodeController(
-        text: source,
-        language: python,
-        theme: atomOneDarkTheme,
-        webSpaceFix: false);
+        text: source, language: python, theme: a, webSpaceFix: false);
 
     onrun() async {
       var cmd = _codeController.text;
@@ -62,13 +62,35 @@ class _MyPythonState extends State<MyPython> {
         title: Text('Python Terminal'),
         backgroundColor: Colors.teal,
         actions: [
-          IconButton(
-              icon: Icon(Icons.code),
-              onPressed: () {
-                print(source);
-                var f = _codeController.text;
-                print(f);
-              })
+          DropdownButton<String>(
+            icon: Icon(Icons.code),
+            iconEnabledColor: Colors.white,
+            items: <String>['atom', 'monokai-sublime', 'VS', 'darcula']
+                .map((String value) {
+              return new DropdownMenuItem<String>(
+                onTap: () {
+                  print(value);
+                  setState(() {
+                    if (value == 'monokai-sublime') {
+                      a = monokaiSublimeTheme;
+                    } else if (value == 'VS') {
+                      a = vsTheme;
+                    } else if (value == 'atom') {
+                      a = atomOneDarkTheme;
+                    } else if (value == 'darcula') {
+                      a = darculaTheme;
+                    }
+                  });
+                },
+                value: value,
+                child: new Text(value),
+              );
+            }).toList(),
+            onChanged: (_) {},
+          ),
+          SizedBox(
+            width: 20,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
