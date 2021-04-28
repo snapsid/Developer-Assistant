@@ -19,7 +19,7 @@ class _MyPythonState extends State<MyPython> {
   @override
   Widget build(BuildContext context) {
     // final source = "void main() {\n    print(\"Hello, world!\");\n}";
-    final source = "print('hello world')";
+    var source = "print('hello world')";
     _codeController = CodeController(
       text: source,
       language: python,
@@ -30,53 +30,64 @@ class _MyPythonState extends State<MyPython> {
       appBar: AppBar(
         title: Text('Python Terminal'),
         backgroundColor: Colors.teal,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.code),
+              onPressed: () {
+                print(source);
+                var f = _codeController.text;
+                print(f);
+              })
+        ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              child: CodeField(
-                controller: _codeController,
-                textStyle: TextStyle(fontFamily: 'SourceCode'),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Container(
+                child: CodeField(
+                  controller: _codeController,
+                  textStyle: TextStyle(fontFamily: 'SourceCode'),
+                ),
               ),
-            ),
-            TextField(
-              onChanged: (value) {
-                cmd = value;
-              },
-              decoration: InputDecoration(
-                  filled: true,
-                  hintText: "Enter your code",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                print(cmd);
-                ip = MyIp.ip_public;
-                // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
-                var url = Uri.parse(
-                    'http://192.168.1.12/cgi-bin/python/test.py?x=$cmd');
-                try {
-                  var response = await http.get(url, headers: {
-                    "Accept": "application/json",
-                    "Access-Control_Allow_Origin": "*"
-                  });
-                  var code = response.statusCode;
-                  print(code);
-                  if (code == 200) {
-                    var body = response.body;
-                    print(body);
-                  } else {
-                    print('invalid IP');
+              TextField(
+                onChanged: (value) {
+                  cmd = value;
+                },
+                decoration: InputDecoration(
+                    filled: true,
+                    hintText: "Enter your code",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  print(cmd);
+                  ip = MyIp.ip_public;
+                  // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
+                  var url = Uri.parse(
+                      'http://192.168.1.12/cgi-bin/python/test.py?x=$cmd');
+                  try {
+                    var response = await http.get(url, headers: {
+                      "Accept": "application/json",
+                      "Access-Control_Allow_Origin": "*"
+                    });
+                    var code = response.statusCode;
+                    print(code);
+                    if (code == 200) {
+                      var body = response.body;
+                      print(body);
+                    } else {
+                      print('invalid IP');
+                    }
+                  } catch (e) {
+                    print(e);
                   }
-                } catch (e) {
-                  print(e);
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
