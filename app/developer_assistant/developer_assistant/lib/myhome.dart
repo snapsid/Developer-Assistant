@@ -10,7 +10,7 @@ class _MyHomeState extends State<MyHome> {
   final List<String> titles = [
     "AWS",
     "DOCKER",
-    "BLACK",
+    "PYTHON",
     "CYAN",
     "BLUE",
     "GREY",
@@ -90,6 +90,9 @@ class _MyHomeState extends State<MyHome> {
                     },
                     onSelectedItem: (index) {
                       print(index);
+                      if (index == 2) {
+                        Navigator.pushNamed(context, 'python');
+                      }
                       // optional
                     },
                     initialPage: 0, // optional
