@@ -10,11 +10,28 @@ class _MyIpState extends State<MyIp> {
   var ip;
 
   onSubmit() async {
-    var url = Uri.parse('http://192.168.1.12/');
-    var response = await http.get(url);
-    var code = response.statusCode;
-    print(code);
-    // Navigator.pushNamed(context, 'home');
+    var url = Uri.parse('http://${ip}/check.html');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = response.body;
+        print(body);
+        if (body == 'hello DA\n') {
+          Navigator.pushNamed(context, 'home');
+        } else {
+          print('nooo');
+        }
+      } else {
+        print('invalid IP');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
