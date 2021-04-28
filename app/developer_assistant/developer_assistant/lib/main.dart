@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'home',
+    initialRoute: 'ip',
     routes: {
       'ip': (context) => MyIp(),
       'home': (context) => MyHome(),

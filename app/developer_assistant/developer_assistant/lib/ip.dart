@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MyIp extends StatefulWidget {
+  static String ip_public;
   @override
   _MyIpState createState() => _MyIpState();
 }
 
 class _MyIpState extends State<MyIp> {
   var ip;
-
   onSubmit() async {
     var url = Uri.parse('http://${ip}/check.html');
     try {
@@ -53,6 +53,7 @@ class _MyIpState extends State<MyIp> {
                 child: TextField(
                   onChanged: (value) {
                     ip = value;
+                    MyIp.ip_public = ip;
                   },
                   decoration: InputDecoration(
                       filled: true,
