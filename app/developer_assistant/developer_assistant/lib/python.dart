@@ -24,17 +24,17 @@ class _MyPythonState extends State<MyPython> {
     var source = 'print("hello world")';
     var finalCode = "heyyy";
     _codeController = CodeController(
-      text: source,
-      language: python,
-      theme: atomOneDarkTheme,
-    );
+        text: source,
+        language: python,
+        theme: atomOneDarkTheme,
+        webSpaceFix: false);
 
     onrun() async {
       var cmd = _codeController.text;
       print(cmd);
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
-      var url = Uri.parse('http://192.168.1.12/cgi-bin/python/test.py?x=$cmd');
+      var url = Uri.parse('http://192.168.43.38/cgi-bin/python/test.py?x=$cmd');
       try {
         var response = await http.get(url, headers: {
           "Accept": "application/json",
