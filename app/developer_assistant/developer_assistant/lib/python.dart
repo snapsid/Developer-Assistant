@@ -9,6 +9,7 @@ import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 
 class MyPython extends StatefulWidget {
+  static String python_op;
   @override
   _MyPythonState createState() => _MyPythonState();
 }
@@ -20,7 +21,7 @@ class _MyPythonState extends State<MyPython> {
   @override
   Widget build(BuildContext context) {
     // final source = "void main() {\n    print(\"Hello, world!\");\n}";
-    var source = "print('hello world')";
+    var source = 'print("hello world")';
     var finalCode = "heyyy";
     _codeController = CodeController(
       text: source,
@@ -44,6 +45,10 @@ class _MyPythonState extends State<MyPython> {
         if (code == 200) {
           var body = response.body;
           print(body);
+
+          MyPython.python_op = body;
+
+          Navigator.pushNamed(context, 'python_output');
         } else {
           print('invalid IP');
         }

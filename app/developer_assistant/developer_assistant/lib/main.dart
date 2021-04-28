@@ -1,6 +1,7 @@
 import 'package:developer_assistant/ip.dart';
 import 'package:developer_assistant/myhome.dart';
 import 'package:developer_assistant/python.dart';
+import 'package:developer_assistant/python_output.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +12,7 @@ void main() {
       'ip': (context) => MyIp(),
       'home': (context) => MyHome(),
       'python': (context) => MyPython(),
+      'python_output': (context) => MyPythonOutput(),
     },
   ));
 }
