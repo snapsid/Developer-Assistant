@@ -1,3 +1,5 @@
+import 'package:developer_assistant/c_code.dart';
+import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/ip.dart';
 import 'package:developer_assistant/myhome.dart';
 import 'package:developer_assistant/python.dart';
@@ -13,6 +15,8 @@ void main() {
       'home': (context) => MyHome(),
       'python': (context) => MyPython(),
       'python_output': (context) => MyPythonOutput(),
+      'ccode': (context) => MyC_code(),
+      'c_output': (context) => MyC_output(),
     },
   ));
 }

@@ -11,7 +11,7 @@ class _MyHomeState extends State<MyHome> {
     "AWS",
     "DOCKER",
     "PYTHON",
-    "CYAN",
+    "C COMPILER",
     "BLUE",
     "GREY",
   ];
@@ -92,6 +92,8 @@ class _MyHomeState extends State<MyHome> {
                       print(index);
                       if (index == 2) {
                         Navigator.pushNamed(context, 'python');
+                      } else if (index == 3) {
+                        Navigator.pushNamed(context, 'ccode');
                       }
                       // optional
                     },

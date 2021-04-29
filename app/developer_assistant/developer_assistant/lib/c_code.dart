@@ -1,40 +1,43 @@
 import 'package:code_text_field/code_text_field.dart';
-import 'package:developer_assistant/ip.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:highlight/languages/dart.dart';
 import 'package:highlight/languages/python.dart';
+import 'package:highlight/languages/cpp.dart';
 import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_highlight/themes/vs.dart';
 import 'package:flutter_highlight/themes/darcula.dart';
 
-class MyPython extends StatefulWidget {
-  static String python_op;
+import 'ip.dart';
+
+class MyC_code extends StatefulWidget {
+  static String c_op;
   @override
-  _MyPythonState createState() => _MyPythonState();
+  _MyC_codeState createState() => _MyC_codeState();
 }
 
-class _MyPythonState extends State<MyPython> {
+class _MyC_codeState extends State<MyC_code> {
   String ip;
   Map<String, TextStyle> a = atomOneDarkTheme;
   var _codeController;
 
   @override
   Widget build(BuildContext context) {
-    // final source = "void main() {\n    print(\"Hello, world!\");\n}";
-    var source = 'print("hello world")';
+    var source = '#include<stdio.h>\n int main(){\n printf("hii");\n}';
     var finalCode = "heyyy";
     _codeController = CodeController(
-        text: source, language: python, theme: a, webSpaceFix: false);
+        text: source, language: cpp, theme: a, webSpaceFix: false);
 
     onrun() async {
       var cmd = _codeController.text;
+      cmd = cmd.toString().replaceAll('#', '??');
+      cmd = cmd.toString().replaceAll(';', '@@');
       print(cmd);
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
-      var url = Uri.parse('http://192.168.1.12/cgi-bin/python/test.py?x=$cmd');
+      var url =
+          Uri.parse('http://192.168.1.12/cgi-bin/c_code/terminal.py?x=$cmd');
       try {
         var response = await http.get(url, headers: {
           "Accept": "application/json",
@@ -46,9 +49,9 @@ class _MyPythonState extends State<MyPython> {
           var body = response.body;
           print(body);
 
-          MyPython.python_op = body;
+          MyC_code.c_op = body;
 
-          Navigator.pushNamed(context, 'python_output');
+          Navigator.pushNamed(context, 'c_output');
         } else {
           print('invalid IP');
         }
@@ -59,7 +62,7 @@ class _MyPythonState extends State<MyPython> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Python Terminal'),
+        title: Text('C Terminal'),
         backgroundColor: Colors.teal,
         actions: [
           DropdownButton<String>(
