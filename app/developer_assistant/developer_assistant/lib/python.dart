@@ -24,13 +24,14 @@ class _MyPythonState extends State<MyPython> {
   @override
   Widget build(BuildContext context) {
     // final source = "void main() {\n    print(\"Hello, world!\");\n}";
-    var source = 'print("hello world")';
+    var source = 'print("Hello World")';
     var finalCode = "heyyy";
     _codeController = CodeController(
         text: source, language: python, theme: a, webSpaceFix: false);
 
     onrun() async {
       var cmd = _codeController.text;
+      cmd = cmd.toString().replaceAll("'", '"');
       print(cmd);
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');

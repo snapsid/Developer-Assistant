@@ -24,7 +24,7 @@ class _MyC_codeState extends State<MyC_code> {
 
   @override
   Widget build(BuildContext context) {
-    var source = '#include<stdio.h>\n int main(){\n printf("hii");\n}';
+    var source = "#include<stdio.h>\n int main(){\n printf('Hello World');}";
     var finalCode = "heyyy";
     _codeController = CodeController(
         text: source, language: cpp, theme: a, webSpaceFix: false);
@@ -33,6 +33,8 @@ class _MyC_codeState extends State<MyC_code> {
       var cmd = _codeController.text;
       cmd = cmd.toString().replaceAll('#', '??');
       cmd = cmd.toString().replaceAll(';', '@@');
+      cmd = cmd.toString().replaceAll('+', '.?');
+      cmd = cmd.toString().replaceAll("'", '"');
       print(cmd);
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
