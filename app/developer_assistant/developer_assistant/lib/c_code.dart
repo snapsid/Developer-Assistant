@@ -24,7 +24,7 @@ class _MyC_codeState extends State<MyC_code> {
 
   @override
   Widget build(BuildContext context) {
-    var source = "#include<stdio.h>\n int main(){\n printf('Hello World');}";
+    var source = '#include<stdio.h>\n int main(){\n printf("Hello World");\n}';
     var finalCode = "heyyy";
     _codeController = CodeController(
         text: source, language: cpp, theme: a, webSpaceFix: false);
@@ -120,7 +120,7 @@ class _MyC_codeState extends State<MyC_code> {
 
                 child: CodeField(
                   controller: _codeController,
-                  textStyle: TextStyle(fontFamily: 'SourceCode'),
+                  textStyle: TextStyle(fontFamily: 'SourceCode', fontSize: 20),
                 ),
               ),
               // Container(

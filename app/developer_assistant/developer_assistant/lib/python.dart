@@ -116,7 +116,7 @@ class _MyPythonState extends State<MyPython> {
 
                 child: CodeField(
                   controller: _codeController,
-                  textStyle: TextStyle(fontFamily: 'SourceCode'),
+                  textStyle: TextStyle(fontFamily: 'SourceCode', fontSize: 20),
                 ),
               ),
               // Container(
