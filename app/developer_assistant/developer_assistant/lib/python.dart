@@ -64,29 +64,32 @@ class _MyPythonState extends State<MyPython> {
         backgroundColor: Colors.teal,
         actions: [
           DropdownButton<String>(
-            dropdownColor: Colors.tealAccent,
+            dropdownColor: Colors.blueGrey,
             elevation: 20,
             icon: Icon(Icons.color_lens_outlined),
             iconEnabledColor: Colors.white,
-            items: <String>['atom', 'monokai-sublime', 'VS', 'darcula']
+            items: <String>['Atom', 'Monokai-sublime', 'VS', 'Darcula']
                 .map((String value) {
               return new DropdownMenuItem<String>(
                 onTap: () {
                   print(value);
                   setState(() {
-                    if (value == 'monokai-sublime') {
+                    if (value == 'Monokai-sublime') {
                       a = monokaiSublimeTheme;
                     } else if (value == 'VS') {
                       a = vsTheme;
-                    } else if (value == 'atom') {
+                    } else if (value == 'Atom') {
                       a = atomOneDarkTheme;
-                    } else if (value == 'darcula') {
+                    } else if (value == 'Darcula') {
                       a = darculaTheme;
                     }
                   });
                 },
                 value: value,
-                child: new Text(value),
+                child: new Text(
+                  value,
+                  style: TextStyle(color: Colors.white),
+                ),
               );
             }).toList(),
             onChanged: (_) {},
