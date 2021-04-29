@@ -9,8 +9,8 @@ class MySoftware extends StatefulWidget {
 
 class _MySoftwareState extends State<MySoftware> {
   final List<String> titles = [
-    "DOCKER",
-    "YUM CONFIGURE",
+    "INSTALL\nDOCKER",
+    "CONFIGURE\nYUM",
   ];
 
   final List<Widget> images = [
@@ -35,6 +35,27 @@ class _MySoftwareState extends State<MySoftware> {
   dockerClick() async {
     print('Docker');
     var url = Uri.parse('http://192.168.43.38/cgi-bin/docker/docker.py');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+      } else {
+        print('invalid IP');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  yumClick() async {
+    print('yum');
+    var url = Uri.parse('http://192.168.43.38/cgi-bin/yumconfigure/yum.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -78,7 +99,9 @@ class _MySoftwareState extends State<MySoftware> {
                       print(index);
                       if (index == 0) {
                         dockerClick();
-                      } else if (index == 1) {}
+                      } else if (index == 1) {
+                        yumClick();
+                      }
                       // optional
                     },
                     initialPage: 0, // optional
