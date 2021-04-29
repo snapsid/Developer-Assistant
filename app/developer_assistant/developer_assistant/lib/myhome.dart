@@ -13,7 +13,8 @@ class _MyHomeState extends State<MyHome> {
     "PYTHON",
     "C COMPILER",
     "C++\nCOMPILER",
-    "GREY",
+    "Installation\nConfiguration",
+    "LINUX",
   ];
 
   final List<Widget> images = [
@@ -65,6 +66,14 @@ class _MyHomeState extends State<MyHome> {
         borderRadius: BorderRadius.circular(40),
       ),
     ),
+    Card(
+      color: Colors.purple,
+      elevation: 20,
+      shape: RoundedRectangleBorder(
+        // side: BorderSide(color: Colors.white70, width: 1),
+        borderRadius: BorderRadius.circular(40),
+      ),
+    ),
   ];
 
   @override
@@ -96,6 +105,10 @@ class _MyHomeState extends State<MyHome> {
                         Navigator.pushNamed(context, 'ccode');
                       } else if (index == 4) {
                         Navigator.pushNamed(context, 'cppcode');
+                      } else if (index == 5) {
+                        Navigator.pushNamed(context, 'software');
+                      } else if (index == 6) {
+                        Navigator.pushNamed(context, 'linux');
                       }
                       // optional
                     },
