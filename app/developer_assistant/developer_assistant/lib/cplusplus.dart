@@ -11,13 +11,13 @@ import 'package:flutter_highlight/themes/darcula.dart';
 
 import 'ip.dart';
 
-class MyC_code extends StatefulWidget {
+class MyCplusplus extends StatefulWidget {
   static String c_op;
   @override
-  _MyC_codeState createState() => _MyC_codeState();
+  _MyCplusplusState createState() => _MyCplusplusState();
 }
 
-class _MyC_codeState extends State<MyC_code> {
+class _MyCplusplusState extends State<MyCplusplus> {
   String ip;
   Map<String, TextStyle> a = atomOneDarkTheme;
   var _codeController;
@@ -25,7 +25,7 @@ class _MyC_codeState extends State<MyC_code> {
   @override
   Widget build(BuildContext context) {
     var source =
-        '#include<stdio.h>\n int main(){\n printf("hello world");\n return 0;\n}';
+        '#include<iostream>\nusing namespace std;\n int main(){\n cout<<"hello cpp";\n}';
     var finalCode = "heyyy";
     _codeController = CodeController(
         text: source, language: cpp, theme: a, webSpaceFix: false);
@@ -40,7 +40,7 @@ class _MyC_codeState extends State<MyC_code> {
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
       var url =
-          Uri.parse('http://192.168.1.12/cgi-bin/c_code/terminal.py?x=$cmd');
+          Uri.parse('http://192.168.1.12/cgi-bin/cpp_code/terminal.py?x=$cmd');
       try {
         var response = await http.get(url, headers: {
           "Accept": "application/json",
@@ -52,9 +52,9 @@ class _MyC_codeState extends State<MyC_code> {
           var body = response.body;
           print(body);
 
-          MyC_code.c_op = body;
+          MyCplusplus.c_op = body;
 
-          Navigator.pushNamed(context, 'c_output');
+          Navigator.pushNamed(context, 'cpp_output');
         } else {
           print('invalid IP');
         }
@@ -65,7 +65,7 @@ class _MyC_codeState extends State<MyC_code> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('C Terminal'),
+        title: Text('C++ Terminal'),
         backgroundColor: Colors.teal,
         actions: [
           DropdownButton<String>(

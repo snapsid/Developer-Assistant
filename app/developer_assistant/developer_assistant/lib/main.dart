@@ -1,5 +1,7 @@
 import 'package:developer_assistant/c_code.dart';
 import 'package:developer_assistant/c_output.dart';
+import 'package:developer_assistant/cplusplus.dart';
+import 'package:developer_assistant/cpp_output.dart';
 import 'package:developer_assistant/ip.dart';
 import 'package:developer_assistant/myhome.dart';
 import 'package:developer_assistant/python.dart';
@@ -17,6 +19,8 @@ void main() {
       'python_output': (context) => MyPythonOutput(),
       'ccode': (context) => MyC_code(),
       'c_output': (context) => MyC_output(),
+      'cppcode': (context) => MyCplusplus(),
+      'cpp_output': (context) => Mycpp_output(),
     },
   ));
 }

@@ -12,7 +12,7 @@ class _MyHomeState extends State<MyHome> {
     "DOCKER",
     "PYTHON",
     "C COMPILER",
-    "BLUE",
+    "C++\nCOMPILER",
     "GREY",
   ];
 
@@ -94,6 +94,8 @@ class _MyHomeState extends State<MyHome> {
                         Navigator.pushNamed(context, 'python');
                       } else if (index == 3) {
                         Navigator.pushNamed(context, 'ccode');
+                      } else if (index == 4) {
+                        Navigator.pushNamed(context, 'cppcode');
                       }
                       // optional
                     },
