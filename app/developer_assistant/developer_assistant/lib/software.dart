@@ -11,6 +11,7 @@ class _MySoftwareState extends State<MySoftware> {
   final List<String> titles = [
     "INSTALL\nDOCKER",
     "CONFIGURE\nYUM",
+    "INSTALL\n AWS CLI"
   ];
 
   final List<Widget> images = [
@@ -24,6 +25,14 @@ class _MySoftwareState extends State<MySoftware> {
     ),
     Card(
       color: Colors.yellow,
+      elevation: 20,
+      shape: RoundedRectangleBorder(
+        // side: BorderSide(color: Colors.white70, width: 1),
+        borderRadius: BorderRadius.circular(40),
+      ),
+    ),
+    Card(
+      color: Colors.blue,
       elevation: 20,
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
@@ -74,6 +83,28 @@ class _MySoftwareState extends State<MySoftware> {
     }
   }
 
+  awsClick() async {
+    print('aws');
+    var url =
+        Uri.parse('http://192.168.43.38/cgi-bin/aws/install/awsinstall.py');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+      } else {
+        print('invalid IP');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +132,8 @@ class _MySoftwareState extends State<MySoftware> {
                         dockerClick();
                       } else if (index == 1) {
                         yumClick();
+                      } else if (index == 2) {
+                        awsClick();
                       }
                       // optional
                     },
