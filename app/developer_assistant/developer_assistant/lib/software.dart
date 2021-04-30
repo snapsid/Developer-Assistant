@@ -56,6 +56,7 @@ class _MySoftwareState extends State<MySoftware> {
 
   dockerClick() async {
     print('Docker');
+    myToast('Please Wait...', Colors.blue);
     var url = Uri.parse('http://192.168.43.38/cgi-bin/docker/docker.py');
     try {
       var response = await http.get(url, headers: {
@@ -67,11 +68,17 @@ class _MySoftwareState extends State<MySoftware> {
       if (code == 200) {
         var body = await response.body;
         print(body);
+        myToast(body, Colors.teal.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
+        myToast('Invalid IP', Colors.red.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     } catch (e) {
       print(e);
+      myToast('Server connection failed...', Colors.red.shade300);
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
 
@@ -107,6 +114,7 @@ class _MySoftwareState extends State<MySoftware> {
 
   awsClick() async {
     print('aws');
+    myToast('Please Wait...', Colors.blue);
     var url =
         Uri.parse('http://192.168.43.38/cgi-bin/aws/install/awsinstall.py');
     try {
@@ -119,11 +127,17 @@ class _MySoftwareState extends State<MySoftware> {
       if (code == 200) {
         var body = await response.body;
         print(body);
+        myToast(body, Colors.teal.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
+        myToast('Invalid IP', Colors.red.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     } catch (e) {
       print(e);
+      myToast('Server connection failed...', Colors.red.shade300);
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
 
