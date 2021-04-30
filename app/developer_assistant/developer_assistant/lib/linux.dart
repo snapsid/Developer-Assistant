@@ -6,6 +6,17 @@ class MyLinux extends StatefulWidget {
 }
 
 class _MyLinuxState extends State<MyLinux> {
+  var inputCmd;
+
+  var textController = TextEditingController();
+
+  onSend() {
+    print(inputCmd);
+    setState(() {
+      textController.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +39,10 @@ class _MyLinuxState extends State<MyLinux> {
                     Container(
                       width: MediaQuery.of(context).size.width - 100,
                       child: TextField(
-                        onChanged: (value) {},
+                        controller: textController,
+                        onChanged: (value) {
+                          inputCmd = value;
+                        },
                         decoration: InputDecoration(
                             filled: true,
                             hintText: "What would you like to do?",
@@ -46,7 +60,9 @@ class _MyLinuxState extends State<MyLinux> {
                           Icons.send,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          onSend();
+                        },
                       ),
                     )
                   ],
