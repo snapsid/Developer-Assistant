@@ -39,8 +39,7 @@ class _MyCplusplusState extends State<MyCplusplus> {
       print(cmd);
       ip = MyIp.ip_public;
       // var url = Uri.parse('http://${ip}/cgi-bin/python/terminal.py');
-      var url =
-          Uri.parse('http://192.168.1.12/cgi-bin/cpp_code/terminal.py?x=$cmd');
+      var url = Uri.parse('http://${ip}/cgi-bin/cpp_code/terminal.py?x=$cmd');
       try {
         var response = await http.get(url, headers: {
           "Accept": "application/json",

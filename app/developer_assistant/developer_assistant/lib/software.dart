@@ -4,6 +4,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 import 'package:http/http.dart' as http;
 
+import 'ip.dart';
+
 class MySoftware extends StatefulWidget {
   @override
   _MySoftwareState createState() => _MySoftwareState();
@@ -11,11 +13,21 @@ class MySoftware extends StatefulWidget {
 
 class _MySoftwareState extends State<MySoftware> {
   bool loading = false;
+
+  String ip;
+
   final List<String> titles = [
     "INSTALL\nDOCKER",
     "CONFIGURE\nYUM",
     "INSTALL\n AWS CLI"
   ];
+
+  @override
+  void initState() {
+    ip = MyIp.ip_public;
+    // TODO: implement initState
+    super.initState();
+  }
 
   final List<Widget> images = [
     Card(
@@ -62,7 +74,7 @@ class _MySoftwareState extends State<MySoftware> {
     setState(() {
       loading = true;
     });
-    var url = Uri.parse('http://192.168.1.12/cgi-bin/docker/docker.py');
+    var url = Uri.parse('http://${ip}/cgi-bin/docker/docker.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -103,7 +115,7 @@ class _MySoftwareState extends State<MySoftware> {
       loading = true;
     });
 
-    var url = Uri.parse('http://192.168.1.12/cgi-bin/yumconfigure/yum.py');
+    var url = Uri.parse('http://${ip}/cgi-bin/yumconfigure/yum.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -144,8 +156,7 @@ class _MySoftwareState extends State<MySoftware> {
     setState(() {
       loading = true;
     });
-    var url =
-        Uri.parse('http://192.168.1.12/cgi-bin/aws/install/awsinstall.py');
+    var url = Uri.parse('http://${ip}/cgi-bin/aws/install/awsinstall.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",

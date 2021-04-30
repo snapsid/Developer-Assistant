@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'ip.dart';
+
 class MyLinux extends StatefulWidget {
   @override
   _MyLinuxState createState() => _MyLinuxState();
@@ -11,6 +13,7 @@ class MyLinux extends StatefulWidget {
 class _MyLinuxState extends State<MyLinux> {
   var inputCmd = "aa";
   var scrollcontorller = ScrollController();
+  String ip;
 
   List msg = [
     "qwe",
@@ -22,6 +25,7 @@ class _MyLinuxState extends State<MyLinux> {
   var textController = TextEditingController();
 
   onSend() async {
+    ip = MyIp.ip_public;
     print(inputCmd);
 
     setState(() {
@@ -31,8 +35,7 @@ class _MyLinuxState extends State<MyLinux> {
     });
     textController.clear();
 
-    var url =
-        Uri.parse('http://192.168.1.12/cgi-bin/linux/linux.py?x=$inputCmd');
+    var url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
