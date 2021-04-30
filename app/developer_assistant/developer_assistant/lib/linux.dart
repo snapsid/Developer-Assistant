@@ -59,6 +59,7 @@ class _MyLinuxState extends State<MyLinux> {
                   child: Container(
                 margin: EdgeInsets.only(left: 15, right: 15),
                 child: ListView.builder(
+                  padding: EdgeInsets.only(bottom: 20),
                   itemCount: 100,
                   itemBuilder: (BuildContext context, int index) {
                     if (index % 2 == 0) {
@@ -110,7 +111,8 @@ class _MyLinuxState extends State<MyLinux> {
                 ),
               )),
               Container(
-                margin: EdgeInsets.only(bottom: 20, left: 15, right: 15),
+                margin:
+                    EdgeInsets.only(bottom: 20, left: 15, right: 15, top: 4),
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
