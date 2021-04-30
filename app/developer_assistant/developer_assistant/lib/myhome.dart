@@ -129,7 +129,7 @@ class _MyHomeState extends State<MyHome> {
                       // optional
                     },
                     initialPage: 0, // optional
-                    align: ALIGN.LEFT // optional
+                    align: ALIGN.CENTER // optional
                     ),
               ),
             ),

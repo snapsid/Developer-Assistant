@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +10,7 @@ class MySoftware extends StatefulWidget {
 }
 
 class _MySoftwareState extends State<MySoftware> {
+  bool loading = false;
   final List<String> titles = [
     "INSTALL\nDOCKER",
     "CONFIGURE\nYUM",
@@ -57,7 +59,10 @@ class _MySoftwareState extends State<MySoftware> {
   dockerClick() async {
     print('Docker');
     myToast('Please Wait...', Colors.blue);
-    var url = Uri.parse('http://192.168.43.38/cgi-bin/docker/docker.py');
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse('http://192.168.1.12/cgi-bin/docker/docker.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -69,15 +74,24 @@ class _MySoftwareState extends State<MySoftware> {
         var body = await response.body;
         print(body);
         myToast(body, Colors.teal.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     } catch (e) {
       print(e);
       myToast('Server connection failed...', Colors.red.shade300);
+      setState(() {
+        loading = false;
+      });
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
@@ -85,6 +99,9 @@ class _MySoftwareState extends State<MySoftware> {
   yumClick() async {
     print('yum');
     myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
 
     var url = Uri.parse('http://192.168.1.12/cgi-bin/yumconfigure/yum.py');
     try {
@@ -98,16 +115,25 @@ class _MySoftwareState extends State<MySoftware> {
         var body = await response.body;
         print(body);
         myToast(body, Colors.teal.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
       // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     } catch (e) {
       print(e);
       myToast('Server connection failed...', Colors.red.shade300);
+      setState(() {
+        loading = false;
+      });
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
@@ -115,8 +141,11 @@ class _MySoftwareState extends State<MySoftware> {
   awsClick() async {
     print('aws');
     myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
     var url =
-        Uri.parse('http://192.168.43.38/cgi-bin/aws/install/awsinstall.py');
+        Uri.parse('http://192.168.1.12/cgi-bin/aws/install/awsinstall.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -128,15 +157,24 @@ class _MySoftwareState extends State<MySoftware> {
         var body = await response.body;
         print(body);
         myToast(body, Colors.teal.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red.shade300);
+        setState(() {
+          loading = false;
+        });
         Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     } catch (e) {
       print(e);
       myToast('Server connection failed...', Colors.red.shade300);
+      setState(() {
+        loading = false;
+      });
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
@@ -148,37 +186,45 @@ class _MySoftwareState extends State<MySoftware> {
         title: Text('Installation / Configure'),
         backgroundColor: Colors.teal,
       ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: VerticalCardPager(
-                    titles: titles, // required
-                    images: images, // required
-                    textStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold), // optional
-                    onPageChanged: (page) {
-                      // optional
-                    },
-                    onSelectedItem: (index) {
-                      print(index);
-                      if (index == 0) {
-                        dockerClick();
-                      } else if (index == 1) {
-                        yumClick();
-                      } else if (index == 2) {
-                        awsClick();
-                      }
-                      // optional
-                    },
-                    initialPage: 0, // optional
-                    align: ALIGN.LEFT // optional
-                    ),
+      body: ModalProgressHUD(
+        inAsyncCall: loading,
+        progressIndicator: CircularProgressIndicator(
+          // backgroundColor: Colors.teal,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
+          strokeWidth: 6,
+        ),
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: VerticalCardPager(
+                      titles: titles, // required
+                      images: images, // required
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold), // optional
+                      onPageChanged: (page) {
+                        // optional
+                      },
+                      onSelectedItem: (index) {
+                        print(index);
+                        if (index == 0) {
+                          dockerClick();
+                        } else if (index == 1) {
+                          yumClick();
+                        } else if (index == 2) {
+                          awsClick();
+                        }
+                        // optional
+                      },
+                      initialPage: 0, // optional
+                      align: ALIGN.CENTER // optional
+                      ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
