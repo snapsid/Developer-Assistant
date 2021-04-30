@@ -23,19 +23,50 @@ class _MyLinuxState extends State<MyLinux> {
   ];
 
   var textController = TextEditingController();
+  var url;
 
-  onSend() async {
+  onStringCheck() {
     ip = MyIp.ip_public;
+    var changedInput;
     print(inputCmd);
 
-    setState(() {
-      msg.add(inputCmd);
-      scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
-          duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
-    });
-    textController.clear();
+    print("${msg[msg.length - 1]}");
 
-    var url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
+    if ((msg[msg.length - 1]).toString().contains("Enter directory name")) {
+      setState(() {
+        print("directory checked");
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+      });
+      textController.clear();
+      url = Uri.parse('http://${ip}/cgi-bin/linux/manual.py?x=$inputCmd');
+      onSend();
+    } else if ((inputCmd.contains('create') || inputCmd.contains('make')) &&
+        (inputCmd.contains('directory') || inputCmd.contains('folder'))) {
+      print('yesss');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+        msg.add("Enter directory name");
+      });
+      textController.clear();
+    } else {
+      url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+      });
+      textController.clear();
+      onSend();
+    }
+  }
+
+  onSend() async {
+    print(inputCmd);
+
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -152,6 +183,7 @@ class _MyLinuxState extends State<MyLinux> {
                         controller: textController,
                         onChanged: (value) {
                           inputCmd = value;
+                          inputCmd = inputCmd.toLowerCase();
                         },
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -181,7 +213,7 @@ class _MyLinuxState extends State<MyLinux> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          onSend();
+                          onStringCheck();
                         },
                       ),
                     )
