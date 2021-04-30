@@ -20,17 +20,18 @@ class _MyLinuxState extends State<MyLinux> {
             children: [
               Expanded(child: Container()),
               Container(
-                margin: EdgeInsets.only(bottom: 20, left: 30, right: 30),
+                margin: EdgeInsets.only(bottom: 20, left: 15, right: 15),
                 alignment: Alignment.bottomCenter,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.68,
+                      width: MediaQuery.of(context).size.width - 100,
                       child: TextField(
                         onChanged: (value) {},
                         decoration: InputDecoration(
                             filled: true,
-                            hintText: "Enter your IP",
+                            hintText: "What would you like to do?",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             )),
