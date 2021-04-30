@@ -10,11 +10,26 @@ class MyLinux extends StatefulWidget {
 
 class _MyLinuxState extends State<MyLinux> {
   var inputCmd = "aa";
+  var scrollcontorller = ScrollController();
+
+  List msg = [
+    "qwe",
+    "abcd",
+    "xyz",
+    "zxc",
+  ];
 
   var textController = TextEditingController();
 
   onSend() async {
     print(inputCmd);
+
+    setState(() {
+      msg.add(inputCmd);
+      scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+          duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+    });
+    textController.clear();
 
     var url =
         Uri.parse('http://192.168.1.12/cgi-bin/linux/linux.py?x=$inputCmd');
@@ -28,6 +43,10 @@ class _MyLinuxState extends State<MyLinux> {
       if (code == 200) {
         var body = response.body;
         print(body);
+
+        setState(() {
+          msg.add(body);
+        });
       } else {
         print('invalid IP');
       }
@@ -36,7 +55,6 @@ class _MyLinuxState extends State<MyLinux> {
     }
 
     inputCmd = '';
-    textController.clear();
   }
 
   @override
@@ -45,6 +63,8 @@ class _MyLinuxState extends State<MyLinux> {
     var chatnip = BubbleNip.rightTop;
     var bubbleMargin = BubbleEdges.only(top: 10, left: 40);
     var chatColor = Color.fromRGBO(225, 255, 199, 1.0);
+    var chatMsgAlgn = TextAlign.right;
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Linux'),
@@ -59,19 +79,24 @@ class _MyLinuxState extends State<MyLinux> {
                   child: Container(
                 margin: EdgeInsets.only(left: 15, right: 15),
                 child: ListView.builder(
+                  shrinkWrap: true,
+                  controller: scrollcontorller,
+
                   padding: EdgeInsets.only(bottom: 20),
-                  itemCount: 100,
+                  itemCount: msg.length,
                   itemBuilder: (BuildContext context, int index) {
                     if (index % 2 == 0) {
                       chatAlignment = Alignment.topRight;
                       chatnip = BubbleNip.rightTop;
                       bubbleMargin = BubbleEdges.only(top: 10, left: 40);
                       chatColor = Color.fromRGBO(225, 255, 199, 1.0);
+                      chatMsgAlgn = TextAlign.right;
                     } else {
                       chatAlignment = Alignment.topLeft;
                       chatnip = BubbleNip.leftTop;
                       bubbleMargin = BubbleEdges.only(top: 10, right: 40);
                       chatColor = Colors.white70;
+                      chatMsgAlgn = TextAlign.left;
                     }
                     return Bubble(
                       margin: bubbleMargin,
@@ -80,9 +105,9 @@ class _MyLinuxState extends State<MyLinux> {
                       // color: Color.fromRGBO(225, 255, 199, 1.0),
                       color: chatColor,
                       child: Text(
-                        'Hello, World! $index',
+                        '${msg[index]}',
                         style: TextStyle(fontSize: 18),
-                        textAlign: TextAlign.right,
+                        textAlign: chatMsgAlgn,
                       ),
                     );
                   },
