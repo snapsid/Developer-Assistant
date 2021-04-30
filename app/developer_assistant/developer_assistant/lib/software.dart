@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,6 +42,18 @@ class _MySoftwareState extends State<MySoftware> {
     ),
   ];
 
+  myToast(mymsg, color) {
+    Fluttertoast.showToast(
+        msg: mymsg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: color,
+        textColor: Colors.white,
+        webPosition: "center",
+        fontSize: 16.0);
+  }
+
   dockerClick() async {
     print('Docker');
     var url = Uri.parse('http://192.168.43.38/cgi-bin/docker/docker.py');
@@ -64,7 +77,9 @@ class _MySoftwareState extends State<MySoftware> {
 
   yumClick() async {
     print('yum');
-    var url = Uri.parse('http://192.168.43.38/cgi-bin/yumconfigure/yum.py');
+    myToast('Please Wait...', Colors.blue);
+
+    var url = Uri.parse('http://192.168.1.12/cgi-bin/yumconfigure/yum.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
@@ -75,11 +90,18 @@ class _MySoftwareState extends State<MySoftware> {
       if (code == 200) {
         var body = await response.body;
         print(body);
+        myToast(body, Colors.teal.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
+        myToast('Invalid IP', Colors.red.shade300);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
+      // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     } catch (e) {
       print(e);
+      myToast('Server connection failed...', Colors.red.shade300);
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
 
