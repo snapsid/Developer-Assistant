@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'home',
+    initialRoute: 'linux',
     routes: {
       'ip': (context) => MyIp(),
       'home': (context) => MyHome(),

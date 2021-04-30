@@ -14,7 +14,7 @@ class _MyHomeState extends State<MyHome> {
     "PYTHON",
     "C COMPILER",
     "C++\nCOMPILER",
-    "INSTALLATION/\nCONFIGURATION",
+    "INSTALL/\nCONFIGURE",
     "LINUX",
   ];
 
