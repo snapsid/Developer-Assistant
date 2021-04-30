@@ -13,6 +13,7 @@ class _MyLinuxState extends State<MyLinux> {
   onSend() {
     print(inputCmd);
     setState(() {
+      inputCmd = '';
       textController.clear();
     });
   }
@@ -39,14 +40,25 @@ class _MyLinuxState extends State<MyLinux> {
                     Container(
                       width: MediaQuery.of(context).size.width - 100,
                       child: TextField(
+                        cursorColor: Colors.teal,
                         controller: textController,
                         onChanged: (value) {
                           inputCmd = value;
                         },
                         decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: Colors.teal.shade600),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
                             filled: true,
                             hintText: "What would you like to do?",
                             border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.teal),
                               borderRadius: BorderRadius.circular(10),
                             )),
                       ),
