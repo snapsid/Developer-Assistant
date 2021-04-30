@@ -1,4 +1,7 @@
+import 'package:bubble/bubble.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MyLinux extends StatefulWidget {
   @override
@@ -6,16 +9,34 @@ class MyLinux extends StatefulWidget {
 }
 
 class _MyLinuxState extends State<MyLinux> {
-  var inputCmd;
+  var inputCmd = "aa";
 
   var textController = TextEditingController();
 
-  onSend() {
+  onSend() async {
     print(inputCmd);
-    setState(() {
-      inputCmd = '';
-      textController.clear();
-    });
+
+    var url =
+        Uri.parse('http://192.168.1.12/cgi-bin/linux/linux.py?x=$inputCmd');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = response.body;
+        print(body);
+      } else {
+        print('invalid IP');
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    inputCmd = '';
+    textController.clear();
   }
 
   @override
@@ -30,7 +51,174 @@ class _MyLinuxState extends State<MyLinux> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(child: Container()),
+              Expanded(
+                  child: Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: ListView(
+                  children: [
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, left: 40),
+                      alignment: Alignment.topRight,
+                      nip: BubbleNip.rightTop,
+                      color: Color.fromRGBO(225, 255, 199, 1.0),
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10, right: 40),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(
+                        'Hello, World!',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
               Container(
                 margin: EdgeInsets.only(bottom: 20, left: 15, right: 15),
                 alignment: Alignment.bottomCenter,
