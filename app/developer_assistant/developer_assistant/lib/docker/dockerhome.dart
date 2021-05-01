@@ -177,7 +177,7 @@ class _DockerHomeState extends State<DockerHome> {
                         } else if (index == 1) {
                           Navigator.pushNamed(context, 'dockerhome');
                         } else if (index == 2) {
-                          Navigator.pushNamed(context, 'python');
+                          Navigator.pushNamed(context, 'pullimage');
                         } else if (index == 3) {
                           Navigator.pushNamed(context, 'ccode');
                         } else if (index == 4) {

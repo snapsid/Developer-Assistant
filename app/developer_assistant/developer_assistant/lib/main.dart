@@ -3,6 +3,7 @@ import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/cplusplus.dart';
 import 'package:developer_assistant/cpp_output.dart';
 import 'package:developer_assistant/docker/dockerhome.dart';
+import 'package:developer_assistant/docker/pullimage.dart';
 import 'package:developer_assistant/docker/service.dart';
 import 'package:developer_assistant/ip.dart';
 import 'package:developer_assistant/linux.dart';
@@ -15,7 +16,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'home',
+    initialRoute: 'pullimage',
     routes: {
       'ip': (context) => MyIp(),
       'home': (context) => MyHome(),
@@ -29,6 +30,7 @@ void main() {
       'software': (context) => MySoftware(),
       'dockerhome': (context) => DockerHome(),
       'dockerservice': (context) => MyDockerService(),
+      'pullimage': (context) => DockerPullUmage(),
     },
   ));
 }
