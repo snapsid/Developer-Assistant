@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
-class MyHome extends StatefulWidget {
+class DockerHome extends StatefulWidget {
   @override
-  _MyHomeState createState() => _MyHomeState();
+  _DockerHomeState createState() => _DockerHomeState();
 }
 
-class _MyHomeState extends State<MyHome> {
+class _DockerHomeState extends State<DockerHome> {
   final List<String> titles = [
-    "AWS",
-    "DOCKER",
-    "PYTHON",
-    "C COMPILER",
-    "C++\nCOMPILER",
-    "INSTALL/\nCONFIGURE",
-    "LINUX",
+    "Docker\nService",
+    "Run\nContainer",
+    "Pull\nImage",
+    "My\nImages",
+    "Running\nContainers",
+    "All\nContainers",
+    "Docker\nVersion",
   ];
 
   final List<Widget> images = [
@@ -81,23 +80,8 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Developer Assistant'),
+        title: Text('Docker'),
         backgroundColor: Colors.teal,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                print('click');
-                Fluttertoast.showToast(
-                    msg: "This is Center Short Toast",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              }),
-        ],
       ),
       body: SafeArea(
         child: Column(

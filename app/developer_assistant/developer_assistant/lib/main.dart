@@ -2,6 +2,7 @@ import 'package:developer_assistant/c_code.dart';
 import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/cplusplus.dart';
 import 'package:developer_assistant/cpp_output.dart';
+import 'package:developer_assistant/docker/dockerhome.dart';
 import 'package:developer_assistant/ip.dart';
 import 'package:developer_assistant/linux.dart';
 import 'package:developer_assistant/myhome.dart';
@@ -25,6 +26,7 @@ void main() {
       'cpp_output': (context) => Mycpp_output(),
       'linux': (context) => MyLinux(),
       'software': (context) => MySoftware(),
+      'dockerhome': (context) => DockerHome(),
     },
   ));
 }
