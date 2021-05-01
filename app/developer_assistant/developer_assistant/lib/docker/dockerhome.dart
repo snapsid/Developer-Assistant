@@ -173,6 +173,7 @@ class _DockerHomeState extends State<DockerHome> {
                         print(index);
                         if (index == 0) {
                           print('docker service');
+                          Navigator.pushNamed(context, 'dockerservice');
                         } else if (index == 1) {
                           Navigator.pushNamed(context, 'dockerhome');
                         } else if (index == 2) {
