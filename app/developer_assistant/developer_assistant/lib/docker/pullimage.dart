@@ -55,14 +55,16 @@ class _DockerPullUmageState extends State<DockerPullUmage> {
         setState(() {
           loading = false;
         });
-        // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'dockerhome', (route) => false);
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red.shade300);
         setState(() {
           loading = false;
         });
-        // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'dockerhome', (route) => false);
       }
     } catch (e) {
       print(e);
@@ -70,7 +72,8 @@ class _DockerPullUmageState extends State<DockerPullUmage> {
       setState(() {
         loading = false;
       });
-      // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'dockerhome', (route) => false);
     }
   }
 
