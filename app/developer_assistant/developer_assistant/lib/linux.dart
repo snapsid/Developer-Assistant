@@ -74,6 +74,29 @@ class _MyLinuxState extends State<MyLinux> {
       url = Uri.parse(
           'http://${ip}/cgi-bin/linux/manualcmd/emptyfile.py?x=$inputCmd');
       onSend();
+    } else if ((inputCmd.contains('check') || inputCmd.contains('verify')) &&
+        (inputCmd.contains('connectivity') ||
+            inputCmd.contains('connection')) &&
+        (inputCmd.contains('ip'))) {
+      print('yesss');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+        msg.add("Enter IP:");
+      });
+      textController.clear();
+    } else if ((msg[msg.length - 1]).toString().contains("Enter IP:")) {
+      setState(() {
+        print("Enter IP checkkkk");
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+      });
+      textController.clear();
+      url = Uri.parse(
+          'http://${ip}/cgi-bin/linux/manualcmd/ipcon.py?x=$inputCmd');
+      onSend();
     } else {
       url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
       setState(() {
