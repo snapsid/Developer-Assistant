@@ -97,6 +97,29 @@ class _MyLinuxState extends State<MyLinux> {
       url = Uri.parse(
           'http://${ip}/cgi-bin/linux/manualcmd/ipcon.py?x=$inputCmd');
       onSend();
+    } else if ((inputCmd.contains('create') || inputCmd.contains('make')) &&
+        (inputCmd.contains('user'))) {
+      print('create user yesss');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+        msg.add("Enter username to create:");
+      });
+      textController.clear();
+    } else if ((msg[msg.length - 1])
+        .toString()
+        .contains("Enter username to create:")) {
+      setState(() {
+        print("Enter IP checkkkk");
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+      });
+      textController.clear();
+      url = Uri.parse(
+          'http://${ip}/cgi-bin/linux/manualcmd/newuser.py?x=$inputCmd');
+      onSend();
     } else {
       url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
       setState(() {
