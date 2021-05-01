@@ -40,7 +40,8 @@ class _MyLinuxState extends State<MyLinux> {
             duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
       });
       textController.clear();
-      url = Uri.parse('http://${ip}/cgi-bin/linux/manual.py?x=$inputCmd');
+      url = Uri.parse(
+          'http://${ip}/cgi-bin/linux/manualcmd/directory.py?x=$inputCmd');
       onSend();
     } else if ((inputCmd.contains('create') || inputCmd.contains('make')) &&
         (inputCmd.contains('directory') || inputCmd.contains('folder'))) {
@@ -52,6 +53,27 @@ class _MyLinuxState extends State<MyLinux> {
         msg.add("Enter directory name");
       });
       textController.clear();
+    } else if ((inputCmd.contains('create') || inputCmd.contains('make')) &&
+        (inputCmd.contains('file'))) {
+      print('yesss fileee');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+        msg.add("Enter file name");
+      });
+      textController.clear();
+    } else if ((msg[msg.length - 1]).toString().contains("Enter file name")) {
+      setState(() {
+        print("file checked");
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+      });
+      textController.clear();
+      url = Uri.parse(
+          'http://${ip}/cgi-bin/linux/manualcmd/emptyfile.py?x=$inputCmd');
+      onSend();
     } else {
       url = Uri.parse('http://${ip}/cgi-bin/linux/linux.py?x=$inputCmd');
       setState(() {
