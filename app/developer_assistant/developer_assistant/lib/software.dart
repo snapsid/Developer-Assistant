@@ -74,7 +74,7 @@ class _MySoftwareState extends State<MySoftware> {
     setState(() {
       loading = true;
     });
-    var url = Uri.parse('http://${ip}/cgi-bin/docker/docker.py');
+    var url = Uri.parse('http://${ip}/cgi-bin/docker/install/docker.py');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",
