@@ -11,8 +11,8 @@ class DockerPullUmage extends StatefulWidget {
 
 class _DockerPullUmageState extends State<DockerPullUmage> {
   bool loading = false;
-  var image;
-  var version;
+  var image = "";
+  var version = "";
   String ip;
 
   @override
@@ -35,11 +35,12 @@ class _DockerPullUmageState extends State<DockerPullUmage> {
   }
 
   imagePull() async {
-    myToast('Please Wait...', Colors.blue);
+    myToast('Pulling image $image:$version\nPlease Wait...', Colors.blue);
     setState(() {
       loading = true;
     });
-    var url = Uri.parse('http://${ip}/cgi-bin/docker/docker/service.py?x=');
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/docker/docker/pullimage.py?x=$image&y=$version');
     try {
       var response = await http.get(url, headers: {
         "Accept": "application/json",

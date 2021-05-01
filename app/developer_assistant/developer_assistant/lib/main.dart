@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'pullimage',
+    initialRoute: 'dockerhome',
     routes: {
       'ip': (context) => MyIp(),
       'home': (context) => MyHome(),
