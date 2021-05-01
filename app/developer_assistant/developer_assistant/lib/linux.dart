@@ -16,10 +16,8 @@ class _MyLinuxState extends State<MyLinux> {
   String ip;
 
   List msg = [
-    "qwe",
-    "abcd",
-    "xyz",
-    "zxc",
+    "hello developer assistant",
+    "hello user",
   ];
 
   var textController = TextEditingController();
@@ -43,6 +41,16 @@ class _MyLinuxState extends State<MyLinux> {
       url = Uri.parse(
           'http://${ip}/cgi-bin/linux/manualcmd/directory.py?x=$inputCmd');
       onSend();
+    } else if ((inputCmd.contains('hello') || inputCmd.contains('hi')) ||
+        inputCmd.contains('hey')) {
+      print('hello yess ');
+      setState(() {
+        msg.add(inputCmd);
+        scrollcontorller.animateTo(scrollcontorller.position.maxScrollExtent,
+            duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+        msg.add("Hello user...");
+      });
+      textController.clear();
     } else if ((inputCmd.contains('create') || inputCmd.contains('make')) &&
         (inputCmd.contains('directory') || inputCmd.contains('folder'))) {
       print('yesss');
@@ -151,9 +159,11 @@ class _MyLinuxState extends State<MyLinux> {
         });
       } else {
         print('invalid IP');
+        msg.add('Developer assistant not responding\nConnection issue');
       }
     } catch (e) {
       print(e);
+      msg.add(e);
     }
 
     inputCmd = '';
@@ -171,6 +181,23 @@ class _MyLinuxState extends State<MyLinux> {
         appBar: AppBar(
           title: Text('Linux'),
           backgroundColor: Colors.teal,
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.live_help_outlined,
+                size: 27,
+              ),
+              onPressed: () {
+                setState(() {
+                  inputCmd = "help me";
+                  onStringCheck();
+                });
+              },
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
         ),
         body: Container(
           child: Column(
