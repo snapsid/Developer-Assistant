@@ -4,6 +4,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 import '../ip.dart';
+import 'package:http/http.dart' as http;
 
 class MyDockerService extends StatefulWidget {
   @override
@@ -65,6 +66,45 @@ class _MyDockerServiceState extends State<MyDockerService> {
         fontSize: 16.0);
   }
 
+  onClickServices(par) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse('http://${ip}/cgi-bin/docker/docker/service.py?x=$par');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal.shade300);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red.shade300);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red.shade300);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,8 +136,12 @@ class _MyDockerServiceState extends State<MyDockerService> {
                       onSelectedItem: (index) {
                         print(index);
                         if (index == 0) {
+                          onClickServices('status');
                         } else if (index == 1) {
-                        } else if (index == 2) {}
+                          onClickServices('restart');
+                        } else if (index == 2) {
+                          onClickServices('stop');
+                        }
                         // optional
                       },
                       initialPage: 0, // optional
