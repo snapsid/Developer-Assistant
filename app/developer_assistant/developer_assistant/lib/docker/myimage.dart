@@ -13,6 +13,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
   bool loading = false;
 
   String ip;
+  var imageList = [];
 
   @override
   void initState() {
@@ -54,6 +55,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
         setState(() {
           loading = false;
         });
+        imageList = body.split('\n');
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red);
@@ -80,7 +82,24 @@ class _MyDockerImageState extends State<MyDockerImage> {
       appBar: AppBar(
         title: Text('Docker my images'),
         backgroundColor: Colors.teal,
-        actions: [IconButton(icon: Icon(Icons.add), onPressed: () {})],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                print(imageList);
+
+                var i1 = imageList[0].toString().substring(0, 13);
+                var i2 = imageList[0].toString().substring(13, 23);
+                var i3 = imageList[0].toString().substring(23, 38);
+                var i4 = imageList[0].toString().substring(38, 53);
+                var i5 = imageList[0].toString().substring(53);
+
+                print(i5);
+
+                //  0, 7, 11,  14+15+16, 21
+                //  (0,13), (13,23),(23, 38),(38, 53)
+              })
+        ],
       ),
       body: ModalProgressHUD(
         inAsyncCall: loading,
