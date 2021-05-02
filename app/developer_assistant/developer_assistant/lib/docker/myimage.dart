@@ -251,6 +251,13 @@ class _MyDockerImageState extends State<MyDockerImage> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
+        onPressed: () {
+          Navigator.pushNamed(context, 'pullimage');
+        },
+        child: Icon(Icons.add),
+      ),
       body: ModalProgressHUD(
         inAsyncCall: loading,
         progressIndicator: CircularProgressIndicator(
