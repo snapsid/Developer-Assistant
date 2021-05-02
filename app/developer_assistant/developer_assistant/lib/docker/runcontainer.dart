@@ -2,6 +2,7 @@ import 'package:developer_assistant/ip.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:http/http.dart' as http;
 
 class DockerRunContainer extends StatefulWidget {
   @override
@@ -46,6 +47,50 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
       print(osname);
       print(image);
       print(version);
+      launchContainer();
+    }
+  }
+
+  launchContainer() async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/docker/docker/runcontainer.py?x=$osname&y=$image&z=$version');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal.shade300);
+        setState(() {
+          loading = false;
+        });
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'dockerhome', (route) => false);
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red.shade300);
+        setState(() {
+          loading = false;
+        });
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red.shade300);
+      setState(() {
+        loading = false;
+      });
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'dockerhome', (route) => false);
     }
   }
 
