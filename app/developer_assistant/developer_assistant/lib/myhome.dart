@@ -20,16 +20,28 @@ class _MyHomeState extends State<MyHome> {
 
   final List<Widget> images = [
     Card(
-      color: Colors.red,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      // color: Colors.red,
       elevation: 20,
+      child: Image.asset(
+        'assets/aws.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
       ),
     ),
     Card(
-      color: Colors.yellow,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      // color: Colors.yellow,
       elevation: 20,
+      child: Image.asset(
+        'assets/docker.png',
+        fit: BoxFit.fitWidth,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -38,6 +50,12 @@ class _MyHomeState extends State<MyHome> {
     Card(
       color: Colors.green,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/python.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -46,6 +64,12 @@ class _MyHomeState extends State<MyHome> {
     Card(
       color: Colors.blue,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/c_compiler.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -54,21 +78,39 @@ class _MyHomeState extends State<MyHome> {
     Card(
       color: Colors.orange,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/cpp_compiler.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
       ),
     ),
     Card(
-      color: Colors.grey,
+      // color: Colors.grey,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/installconf.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
       ),
     ),
     Card(
-      color: Colors.purple,
+      // color: Colors.purple,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/linux.png',
+        fit: BoxFit.cover,
+      ),
       elevation: 20,
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
@@ -81,7 +123,9 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Developer Assistant'),
+        title: Text(
+          'Developer Assistant',
+        ),
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
@@ -108,6 +152,8 @@ class _MyHomeState extends State<MyHome> {
                     titles: titles, // required
                     images: images, // required
                     textStyle: TextStyle(
+                        letterSpacing: 5,
+                        fontFamily: 'Chewy',
                         color: Colors.white,
                         fontWeight: FontWeight.bold), // optional
                     onPageChanged: (page) {
