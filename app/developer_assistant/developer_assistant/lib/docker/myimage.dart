@@ -1,5 +1,6 @@
 import 'package:developer_assistant/ip.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -106,6 +107,57 @@ class _MyDockerImageState extends State<MyDockerImage> {
     }
   }
 
+  var list = ['a', 'b', 'c', 'd', 'e'];
+
+  slidelist(index) {
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      child: Container(
+        color: Colors.white,
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.indigoAccent,
+            child: Text('3'),
+            foregroundColor: Colors.white,
+          ),
+          title: Text('${list[index]} '),
+          subtitle: Text('SlidableDrawerDelegate'),
+        ),
+      ),
+      actions: <Widget>[
+        IconSlideAction(
+          caption: 'Archive',
+          color: Colors.blue,
+          icon: Icons.archive,
+          onTap: () {},
+        ),
+        IconSlideAction(
+          caption: 'Share',
+          color: Colors.indigo,
+          icon: Icons.share,
+          onTap: () {},
+        ),
+      ],
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'More',
+          color: Colors.black45,
+          icon: Icons.more_horiz,
+          onTap: () {},
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () {
+            setState(() {});
+          },
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +186,18 @@ class _MyDockerImageState extends State<MyDockerImage> {
           valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
           strokeWidth: 6,
         ),
-        child: Container(),
+        child: Container(
+          child: ListView.builder(
+            shrinkWrap: true,
+            // controller: scrollcontorller,
+
+            padding: EdgeInsets.only(bottom: 20),
+            itemCount: list.length,
+            itemBuilder: (BuildContext context, int index) {
+              return slidelist(index);
+            },
+          ),
+        ),
       ),
     );
   }
