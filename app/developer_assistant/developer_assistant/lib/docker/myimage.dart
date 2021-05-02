@@ -16,7 +16,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
   String ip;
   var imageList = [];
   var finalList = [];
-
+  var listLength = 0;
   @override
   void initState() {
     ip = MyIp.ip_public;
@@ -43,7 +43,6 @@ class _MyDockerImageState extends State<MyDockerImage> {
       }
 
       print(finalList);
-      myToast(finalList[1], Colors.teal);
 
       // print(imageList[1]);
       // var i2 = imageList[1].toString().substring(13, 23);
@@ -83,11 +82,12 @@ class _MyDockerImageState extends State<MyDockerImage> {
         var body = await response.body;
         print(body);
         myToast(body, Colors.teal);
-        setState(() {
-          loading = false;
-        });
         imageList = body.split('\n');
         imageStringSplit();
+        setState(() {
+          loading = false;
+          listLength = imageList.length - 2;
+        });
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red);
@@ -248,7 +248,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
             // controller: scrollcontorller,
 
             padding: EdgeInsets.only(bottom: 20),
-            itemCount: imageList.length - 2,
+            itemCount: listLength,
             itemBuilder: (BuildContext context, int index) {
               if (finalList != 0) {
                 return slidelist(index);
