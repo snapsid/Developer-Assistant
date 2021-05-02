@@ -200,6 +200,12 @@ class _MyLinuxState extends State<MyLinux> {
           ],
         ),
         body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg_chat.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
