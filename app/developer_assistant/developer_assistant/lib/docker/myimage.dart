@@ -116,6 +116,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
     var imageId = finalSplitString[2];
     var createdDate =
         "${finalSplitString[3]} ${finalSplitString[4]} ${finalSplitString[5]}";
+    var imageSize = finalSplitString[6];
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -191,13 +192,25 @@ class _MyDockerImageState extends State<MyDockerImage> {
       ],
       secondaryActions: <Widget>[
         Container(
-            margin: EdgeInsets.only(top: 5, bottom: 5),
-            child: IconSlideAction(
-              caption: 'Size\n259mb',
-              color: Colors.black45,
-              icon: Icons.more_horiz,
-              onTap: () {},
-            )),
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 5, bottom: 5),
+          height: double.infinity,
+          width: double.infinity,
+          color: Colors.black45,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.sd_storage,
+                color: Colors.white,
+              ),
+              Text(
+                imageSize,
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ],
+          ),
+        ),
         Container(
           margin: EdgeInsets.only(top: 5, bottom: 5),
           child: IconSlideAction(
@@ -221,9 +234,9 @@ class _MyDockerImageState extends State<MyDockerImage> {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.refresh),
               onPressed: () {
-                print(imageList);
+                getImages();
                 // imageStringSplit();
 
                 // print(imageList[1]);
@@ -232,7 +245,10 @@ class _MyDockerImageState extends State<MyDockerImage> {
 
                 //  0, 7, 11,  14+15+16, 21
                 //  (0,13), (13,23),(23, 38),(38, 53)
-              })
+              }),
+          SizedBox(
+            width: 10,
+          )
         ],
       ),
       body: ModalProgressHUD(
