@@ -33,6 +33,12 @@ class _MySoftwareState extends State<MySoftware> {
     Card(
       color: Colors.red,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/install_docker.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -41,6 +47,12 @@ class _MySoftwareState extends State<MySoftware> {
     Card(
       color: Colors.yellow,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/configure_yum.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -49,6 +61,12 @@ class _MySoftwareState extends State<MySoftware> {
     Card(
       color: Colors.blue,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/aws_install.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -213,6 +231,15 @@ class _MySoftwareState extends State<MySoftware> {
                       titles: titles, // required
                       images: images, // required
                       textStyle: TextStyle(
+                          letterSpacing: 5,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 12.0,
+                              color: Colors.black54,
+                            ),
+                          ],
+                          fontFamily: 'Chewy',
                           color: Colors.white,
                           fontWeight: FontWeight.bold), // optional
                       onPageChanged: (page) {

@@ -31,6 +31,12 @@ class _MyDockerServiceState extends State<MyDockerService> {
     Card(
       color: Colors.blue,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/service_status.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -39,6 +45,12 @@ class _MyDockerServiceState extends State<MyDockerService> {
     Card(
       color: Colors.green,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/start_service.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -47,6 +59,12 @@ class _MyDockerServiceState extends State<MyDockerService> {
     Card(
       color: Colors.red,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/stop_service.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -128,6 +146,15 @@ class _MyDockerServiceState extends State<MyDockerService> {
                       titles: titles, // required
                       images: images, // required
                       textStyle: TextStyle(
+                          letterSpacing: 5,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 12.0,
+                              color: Colors.black54,
+                            ),
+                          ],
+                          fontFamily: 'Chewy',
                           color: Colors.white,
                           fontWeight: FontWeight.bold), // optional
                       onPageChanged: (page) {
