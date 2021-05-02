@@ -184,7 +184,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
         Container(
             margin: EdgeInsets.only(top: 5, bottom: 5),
             child: IconSlideAction(
-              caption: 'More',
+              caption: 'Size\n259mb',
               color: Colors.black45,
               icon: Icons.more_horiz,
               onTap: () {},
