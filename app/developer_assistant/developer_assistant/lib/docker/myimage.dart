@@ -88,13 +88,25 @@ class _MyDockerImageState extends State<MyDockerImage> {
               onPressed: () {
                 print(imageList);
 
-                var i1 = imageList[0].toString().substring(0, 13);
-                var i2 = imageList[0].toString().substring(13, 23);
-                var i3 = imageList[0].toString().substring(23, 38);
-                var i4 = imageList[0].toString().substring(38, 53);
-                var i5 = imageList[0].toString().substring(53);
+                var finalList = [];
 
-                print(i5);
+                for (int i = 0; i < imageList.length - 1; i++) {
+                  var i1 = imageList[i].toString().substring(0, 13);
+                  var i2 = imageList[i].toString().substring(13, 23);
+                  var i3 = imageList[i].toString().substring(23, 38);
+                  var i4 = imageList[i].toString().substring(38, 53);
+                  var i5 = imageList[i].toString().substring(53);
+
+                  String a =
+                      "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
+                  finalList.add(a);
+                }
+
+                print(finalList);
+
+                // print(imageList[1]);
+                // var i2 = imageList[1].toString().substring(13, 23);
+                // print(i2);
 
                 //  0, 7, 11,  14+15+16, 21
                 //  (0,13), (13,23),(23, 38),(38, 53)
