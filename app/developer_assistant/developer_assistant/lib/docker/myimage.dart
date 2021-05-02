@@ -22,6 +22,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
     ip = MyIp.ip_public;
     // TODO: implement initState
     super.initState();
+
     getImages();
   }
 
@@ -29,7 +30,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
     {
       print(imageList);
 
-      for (int i = 0; i < imageList.length - 1; i++) {
+      for (int i = 1; i < imageList.length - 1; i++) {
         var i1 = imageList[i].toString().substring(0, 13);
         var i2 = imageList[i].toString().substring(13, 23);
         var i3 = imageList[i].toString().substring(23, 38);
@@ -108,6 +109,14 @@ class _MyDockerImageState extends State<MyDockerImage> {
   }
 
   slidelist(index) {
+    var finalSplitString = finalList[index].toString().split(" ");
+    print("fffffffff $finalSplitString");
+    var imageName = finalSplitString[0];
+    var version = finalSplitString[1];
+    var imageId = finalSplitString[2];
+    var createdDate =
+        "${finalSplitString[3]} ${finalSplitString[4]} ${finalSplitString[5]}";
+
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -127,14 +136,14 @@ class _MyDockerImageState extends State<MyDockerImage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Centos',
+                          imageName,
                           style: TextStyle(
                               color: Colors.teal,
                               fontSize: 25,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'Image id',
+                          'ID: $imageId',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
@@ -147,7 +156,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
                         margin: EdgeInsets.only(bottom: 10, right: 20),
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          'Created: 2 months ago',
+                          'Created: $createdDate',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         )),
@@ -155,7 +164,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
                         margin: EdgeInsets.only(top: 10, right: 20),
                         alignment: Alignment.topRight,
                         child: Text(
-                          'Version: latest',
+                          'Version: $version',
                           style: TextStyle(
                               color: Colors.teal.shade500,
                               fontSize: 15,
@@ -214,7 +223,8 @@ class _MyDockerImageState extends State<MyDockerImage> {
           IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                imageStringSplit();
+                print(imageList);
+                // imageStringSplit();
 
                 // print(imageList[1]);
                 // var i2 = imageList[1].toString().substring(13, 23);
@@ -238,9 +248,13 @@ class _MyDockerImageState extends State<MyDockerImage> {
             // controller: scrollcontorller,
 
             padding: EdgeInsets.only(bottom: 20),
-            itemCount: 5,
+            itemCount: imageList.length - 2,
             itemBuilder: (BuildContext context, int index) {
-              return slidelist(index);
+              if (finalList != 0) {
+                return slidelist(index);
+              } else {
+                return Container();
+              }
             },
           ),
         ),
