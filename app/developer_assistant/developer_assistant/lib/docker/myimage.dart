@@ -107,53 +107,99 @@ class _MyDockerImageState extends State<MyDockerImage> {
     }
   }
 
-  var list = ['a', 'b', 'c', 'd', 'e'];
-
   slidelist(index) {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
-        color: Colors.white,
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.indigoAccent,
-            child: Text('3'),
-            foregroundColor: Colors.white,
-          ),
-          title: Text('${list[index]} '),
-          subtitle: Text('SlidableDrawerDelegate'),
-        ),
-      ),
+          color: Colors.white,
+          child: Container(
+            height: 120,
+            // margin: EdgeInsets.only(top: 10),
+            child: Card(
+              elevation: 1,
+              child: Container(
+                margin: EdgeInsets.only(left: 30, top: 10),
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Centos',
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          'Image id',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        )
+                      ],
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(bottom: 10, right: 20),
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          'Created: 2 months ago',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w400),
+                        )),
+                    Container(
+                        margin: EdgeInsets.only(top: 10, right: 20),
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          'Version: latest',
+                          style: TextStyle(
+                              color: Colors.teal.shade500,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )),
       actions: <Widget>[
-        IconSlideAction(
-          caption: 'Archive',
-          color: Colors.blue,
-          icon: Icons.archive,
-          onTap: () {},
-        ),
-        IconSlideAction(
-          caption: 'Share',
-          color: Colors.indigo,
-          icon: Icons.share,
-          onTap: () {},
-        ),
+        // IconSlideAction(
+        //   caption: 'Archive',
+        //   color: Colors.blue,
+        //   icon: Icons.archive,
+        //   onTap: () {},
+        // ),
+        // IconSlideAction(
+        //   caption: 'Share',
+        //   color: Colors.indigo,
+        //   icon: Icons.share,
+        //   onTap: () {},
+        // ),
       ],
       secondaryActions: <Widget>[
-        IconSlideAction(
-          caption: 'More',
-          color: Colors.black45,
-          icon: Icons.more_horiz,
-          onTap: () {},
-        ),
-        IconSlideAction(
-          caption: 'Delete',
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () {
-            setState(() {});
-          },
-        ),
+        Container(
+            margin: EdgeInsets.only(top: 5, bottom: 5),
+            child: IconSlideAction(
+              caption: 'More',
+              color: Colors.black45,
+              icon: Icons.more_horiz,
+              onTap: () {},
+            )),
+        Container(
+          margin: EdgeInsets.only(top: 5, bottom: 5),
+          child: IconSlideAction(
+            caption: 'Delete',
+            color: Colors.red,
+            icon: Icons.delete,
+            onTap: () {
+              setState(() {});
+            },
+          ),
+        )
       ],
     );
   }
@@ -192,7 +238,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
             // controller: scrollcontorller,
 
             padding: EdgeInsets.only(bottom: 20),
-            itemCount: list.length,
+            itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
               return slidelist(index);
             },
