@@ -175,7 +175,7 @@ class _DockerHomeState extends State<DockerHome> {
                           print('docker service');
                           Navigator.pushNamed(context, 'dockerservice');
                         } else if (index == 1) {
-                          Navigator.pushNamed(context, 'dockerhome');
+                          Navigator.pushNamed(context, 'runcontainer');
                         } else if (index == 2) {
                           Navigator.pushNamed(context, 'pullimage');
                         } else if (index == 3) {
