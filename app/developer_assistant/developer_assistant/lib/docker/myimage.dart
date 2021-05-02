@@ -14,6 +14,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
 
   String ip;
   var imageList = [];
+  var finalList = [];
 
   @override
   void initState() {
@@ -21,6 +22,34 @@ class _MyDockerImageState extends State<MyDockerImage> {
     // TODO: implement initState
     super.initState();
     getImages();
+  }
+
+  imageStringSplit() {
+    {
+      print(imageList);
+
+      for (int i = 0; i < imageList.length - 1; i++) {
+        var i1 = imageList[i].toString().substring(0, 13);
+        var i2 = imageList[i].toString().substring(13, 23);
+        var i3 = imageList[i].toString().substring(23, 38);
+        var i4 = imageList[i].toString().substring(38, 53);
+        var i5 = imageList[i].toString().substring(53);
+
+        String a =
+            "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
+        finalList.add(a);
+      }
+
+      print(finalList);
+      myToast(finalList[1], Colors.teal);
+
+      // print(imageList[1]);
+      // var i2 = imageList[1].toString().substring(13, 23);
+      // print(i2);
+
+      //  0, 7, 11,  14+15+16, 21
+      //  (0,13), (13,23),(23, 38),(38, 53)
+    }
   }
 
   myToast(mymsg, color) {
@@ -56,6 +85,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
           loading = false;
         });
         imageList = body.split('\n');
+        imageStringSplit();
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red);
@@ -86,23 +116,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
           IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                print(imageList);
-
-                var finalList = [];
-
-                for (int i = 0; i < imageList.length - 1; i++) {
-                  var i1 = imageList[i].toString().substring(0, 13);
-                  var i2 = imageList[i].toString().substring(13, 23);
-                  var i3 = imageList[i].toString().substring(23, 38);
-                  var i4 = imageList[i].toString().substring(38, 53);
-                  var i5 = imageList[i].toString().substring(53);
-
-                  String a =
-                      "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
-                  finalList.add(a);
-                }
-
-                print(finalList);
+                imageStringSplit();
 
                 // print(imageList[1]);
                 // var i2 = imageList[1].toString().substring(13, 23);
