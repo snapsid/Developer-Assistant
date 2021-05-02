@@ -35,6 +35,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.red,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/docker_service.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -43,6 +49,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.yellow,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/run_container.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -51,6 +63,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.green,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/pull_image.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -59,6 +77,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.blue,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/my_images.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -67,6 +91,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.orange,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/running_containers.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -75,6 +105,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.grey,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/all_container.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -83,6 +119,12 @@ class _DockerHomeState extends State<DockerHome> {
     Card(
       color: Colors.purple,
       elevation: 20,
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Image.asset(
+        'assets/docker_version.png',
+        fit: BoxFit.cover,
+      ),
       shape: RoundedRectangleBorder(
         // side: BorderSide(color: Colors.white70, width: 1),
         borderRadius: BorderRadius.circular(40),
@@ -164,6 +206,15 @@ class _DockerHomeState extends State<DockerHome> {
                       titles: titles, // required
                       images: images, // required
                       textStyle: TextStyle(
+                          letterSpacing: 5,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 12.0,
+                              color: Colors.black54,
+                            ),
+                          ],
+                          fontFamily: 'Chewy',
                           color: Colors.white,
                           fontWeight: FontWeight.bold), // optional
                       onPageChanged: (page) {

@@ -154,6 +154,13 @@ class _MyHomeState extends State<MyHome> {
                     textStyle: TextStyle(
                         letterSpacing: 5,
                         fontFamily: 'Chewy',
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 12.0,
+                            color: Colors.black54,
+                          ),
+                        ],
                         color: Colors.white,
                         fontWeight: FontWeight.bold), // optional
                     onPageChanged: (page) {
