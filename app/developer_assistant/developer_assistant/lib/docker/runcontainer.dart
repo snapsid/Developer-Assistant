@@ -68,29 +68,36 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
       if (code == 200) {
         var body = await response.body;
         print(body);
-        myToast(body, Colors.teal.shade300);
+
         setState(() {
           loading = false;
         });
-        Navigator.pushNamedAndRemoveUntil(
-            context, 'dockerhome', (route) => false);
+        if (body.contains('already in use') &&
+            body.contains('using other name')) {
+          print('xdddddddddddd');
+          myToast(body, Colors.red);
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'dockerhome', (route) => false);
+          myToast(body, Colors.teal);
+        }
       } else {
         print('invalid IP');
-        myToast('Invalid IP', Colors.red.shade300);
+        myToast('Invalid IP', Colors.red);
         setState(() {
           loading = false;
         });
-        Navigator.pushNamedAndRemoveUntil(
-            context, 'dockerhome', (route) => false);
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
       }
     } catch (e) {
       print(e);
-      myToast('Server connection failed...', Colors.red.shade300);
+      myToast('Server connection failed...', Colors.red);
       setState(() {
         loading = false;
       });
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'dockerhome', (route) => false);
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
     }
   }
 
