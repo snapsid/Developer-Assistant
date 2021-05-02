@@ -10,6 +10,7 @@ class DockerRunContainer extends StatefulWidget {
 
 class _DockerRunContainerState extends State<DockerRunContainer> {
   bool loading = false;
+  var osname = "";
   var image = "";
   var version = "";
   String ip;
@@ -31,6 +32,21 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
         textColor: Colors.white,
         webPosition: "center",
         fontSize: 16.0);
+  }
+
+  onStringCheck() {
+    if (osname == "") {
+      myToast("Enter Container name", Colors.red);
+    } else if (image == "") {
+      myToast("Enter Image name", Colors.red);
+    } else {
+      if (version == "") {
+        version = 'latest';
+      }
+      print(osname);
+      print(image);
+      print(version);
+    }
   }
 
   @override
@@ -55,7 +71,9 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
               children: [
                 TextField(
                   cursorColor: Colors.teal,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    osname = value;
+                  },
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -77,7 +95,9 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
                 ),
                 TextField(
                   cursorColor: Colors.teal,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    image = value;
+                  },
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -99,7 +119,9 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
                 ),
                 TextField(
                   cursorColor: Colors.teal,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    version = value;
+                  },
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -128,7 +150,9 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
                       'Launch Container',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      onStringCheck();
+                    },
                     minWidth: 130,
                     height: 40,
                   ),
