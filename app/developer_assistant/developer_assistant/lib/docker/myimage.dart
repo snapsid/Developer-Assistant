@@ -39,7 +39,9 @@ class _MyDockerImageState extends State<MyDockerImage> {
 
         String a =
             "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
-        finalList.add(a);
+        setState(() {
+          finalList.add(a);
+        });
       }
 
       print(finalList);
@@ -82,9 +84,10 @@ class _MyDockerImageState extends State<MyDockerImage> {
         var body = await response.body;
         print(body);
         myToast(body, Colors.teal);
-        imageList = body.split('\n');
-        imageStringSplit();
+
         setState(() {
+          imageList = body.split('\n');
+          imageStringSplit();
           loading = false;
           listLength = imageList.length - 2;
         });
@@ -232,24 +235,6 @@ class _MyDockerImageState extends State<MyDockerImage> {
       appBar: AppBar(
         title: Text('Docker my images'),
         backgroundColor: Colors.teal,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                getImages();
-                // imageStringSplit();
-
-                // print(imageList[1]);
-                // var i2 = imageList[1].toString().substring(13, 23);
-                // print(i2);
-
-                //  0, 7, 11,  14+15+16, 21
-                //  (0,13), (13,23),(23, 38),(38, 53)
-              }),
-          SizedBox(
-            width: 10,
-          )
-        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
