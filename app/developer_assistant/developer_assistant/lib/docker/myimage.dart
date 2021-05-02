@@ -28,6 +28,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
 
   imageStringSplit() {
     {
+      finalList = [];
       print(imageList);
 
       for (int i = 1; i < imageList.length - 1; i++) {
@@ -88,6 +89,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
 
         setState(() {
           loading = false;
+          getImages();
         });
       } else {
         print('invalid IP');
@@ -279,6 +281,7 @@ class _MyDockerImageState extends State<MyDockerImage> {
       appBar: AppBar(
         title: Text('Docker my images'),
         backgroundColor: Colors.teal,
+        actions: [],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
