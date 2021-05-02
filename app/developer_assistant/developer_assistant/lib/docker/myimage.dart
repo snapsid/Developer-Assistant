@@ -35,8 +35,8 @@ class _MyDockerImageState extends State<MyDockerImage> {
         var i1 = imageList[i].toString().substring(0, 13);
         var i2 = imageList[i].toString().substring(13, 23);
         var i3 = imageList[i].toString().substring(23, 38);
-        var i4 = imageList[i].toString().substring(38, 53);
-        var i5 = imageList[i].toString().substring(53);
+        var i4 = imageList[i].toString().substring(38, 52);
+        var i5 = imageList[i].toString().substring(52);
 
         String a =
             "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
