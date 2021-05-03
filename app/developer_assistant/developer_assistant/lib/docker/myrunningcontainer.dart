@@ -266,31 +266,24 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
       ],
       secondaryActions: <Widget>[
         Container(
-          alignment: Alignment.center,
           margin: EdgeInsets.only(top: 5, bottom: 5),
-          height: double.infinity,
-          width: double.infinity,
-          color: Colors.black45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.code,
-                color: Colors.white,
-              ),
-              Text(
-                shell,
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-            ],
+          child: IconSlideAction(
+            caption: 'STOP',
+            color: Colors.red.shade300,
+            icon: Icons.stop_rounded,
+            onTap: () {
+              setState(() {
+                // removeImage(imageId);
+              });
+            },
           ),
         ),
         Container(
           margin: EdgeInsets.only(top: 5, bottom: 5),
           child: IconSlideAction(
-            caption: 'Delete',
+            caption: 'TERMINATE',
             color: Colors.red,
-            icon: Icons.delete,
+            icon: Icons.delete_forever,
             onTap: () {
               setState(() {
                 // removeImage(imageId);
