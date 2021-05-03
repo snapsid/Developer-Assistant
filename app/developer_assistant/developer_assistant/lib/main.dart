@@ -4,6 +4,7 @@ import 'package:developer_assistant/cplusplus.dart';
 import 'package:developer_assistant/cpp_output.dart';
 import 'package:developer_assistant/docker/dockerhome.dart';
 import 'package:developer_assistant/docker/myimage.dart';
+import 'package:developer_assistant/docker/myrunningcontainer.dart';
 import 'package:developer_assistant/docker/pullimage.dart';
 import 'package:developer_assistant/docker/runcontainer.dart';
 import 'package:developer_assistant/docker/service.dart';
@@ -35,6 +36,7 @@ void main() {
       'pullimage': (context) => DockerPullUmage(),
       'runcontainer': (context) => DockerRunContainer(),
       'dockermyimages': (context) => MyDockerImage(),
+      'myrunningcontainer': (context) => MyRunningContainer(),
     },
   ));
 }

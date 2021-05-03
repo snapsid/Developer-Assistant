@@ -16,7 +16,7 @@ class _DockerHomeState extends State<DockerHome> {
   String ip;
   final List<String> titles = [
     "Docker\nService",
-    "Run\nContainer",
+    "Launch\nContainer",
     "Pull\nImage",
     "My\nImages",
     "Running\nContainers",
@@ -232,7 +232,7 @@ class _DockerHomeState extends State<DockerHome> {
                         } else if (index == 3) {
                           Navigator.pushNamed(context, 'dockermyimages');
                         } else if (index == 4) {
-                          Navigator.pushNamed(context, 'cppcode');
+                          Navigator.pushNamed(context, 'myrunningcontainer');
                         } else if (index == 5) {
                           Navigator.pushNamed(context, 'software');
                         } else if (index == 6) {
