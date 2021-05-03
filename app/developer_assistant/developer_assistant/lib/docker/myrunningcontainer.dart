@@ -388,7 +388,16 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
       appBar: AppBar(
         title: Text('Docker running containers'),
         backgroundColor: Colors.teal,
-        actions: [],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                getRunningContainer();
+              }),
+          SizedBox(
+            width: 10,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,

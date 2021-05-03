@@ -281,7 +281,16 @@ class _MyDockerImageState extends State<MyDockerImage> {
       appBar: AppBar(
         title: Text('Docker my images'),
         backgroundColor: Colors.teal,
-        actions: [],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                getImages();
+              }),
+          SizedBox(
+            width: 10,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
