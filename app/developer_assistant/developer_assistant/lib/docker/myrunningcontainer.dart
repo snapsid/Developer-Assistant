@@ -53,7 +53,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
       var portstart = imageList[0].toString().indexOf('PORTS');
       var namesstart = imageList[0].toString().indexOf('NAMES');
 
-      for (int i = 0; i < imageList.length - 1; i++) {
+      for (int i = 1; i < imageList.length - 1; i++) {
         var i1 = imageList[i].toString().substring(idstart, imagestart);
         var i2 = imageList[i].toString().substring(imagestart, cmdstart);
         var i3 = imageList[i].toString().substring(cmdstart, createdstart);
@@ -141,6 +141,25 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
   }
 
   slidelist(index) {
+    var finalSplitString = finalList[index].toString().split(" ");
+    print("fffffffff $finalSplitString");
+    var containerId = finalSplitString[0];
+    var imageName = finalSplitString[1];
+    var shell = finalSplitString[2];
+    var osName = finalSplitString[finalSplitString.length - 1];
+    var uptime =
+        "${finalSplitString[finalSplitString.length - 5]} ${finalSplitString[finalSplitString.length - 4]} ${finalSplitString[finalSplitString.length - 3]}";
+    var createdDate = "";
+
+    if (finalSplitString.length == 12) {
+      createdDate =
+          "${finalSplitString[finalSplitString.length - 9]} ${finalSplitString[finalSplitString.length - 8]} ${finalSplitString[finalSplitString.length - 7]} ${finalSplitString[finalSplitString.length - 6]}";
+    }
+    if (finalSplitString.length == 11) {
+      createdDate =
+          "${finalSplitString[finalSplitString.length - 8]} ${finalSplitString[finalSplitString.length - 7]} ${finalSplitString[finalSplitString.length - 6]}";
+    }
+
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -160,19 +179,19 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "os name",
+                          "$osName",
                           style: TextStyle(
                               color: Colors.teal,
                               fontSize: 25,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'ID: 799416853',
+                          'ID: $containerId',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
                         Text(
-                          'Image: centos:5',
+                          'Image: $imageName',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
@@ -185,7 +204,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
                         margin: EdgeInsets.only(bottom: 10, right: 20),
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          'Created: dateee',
+                          'Created: $createdDate',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         )),
@@ -204,7 +223,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
                               width: 5,
                             ),
                             Text(
-                              'Up 16 minutes',
+                              '$uptime',
                               style: TextStyle(
                                   color: Colors.teal.shade500,
                                   fontSize: 15,
@@ -246,7 +265,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
                 color: Colors.white,
               ),
               Text(
-                "/bin/bash",
+                shell,
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
@@ -297,7 +316,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
             // controller: scrollcontorller,
 
             padding: EdgeInsets.only(bottom: 20),
-            itemCount: 5,
+            itemCount: listLength,
             itemBuilder: (BuildContext context, int index) {
               if (finalList != 0) {
                 return slidelist(index);
