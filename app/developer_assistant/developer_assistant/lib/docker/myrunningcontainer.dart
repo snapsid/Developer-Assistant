@@ -169,7 +169,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Docker my images'),
+        title: Text('Docker running containers'),
         backgroundColor: Colors.teal,
         actions: [],
       ),
