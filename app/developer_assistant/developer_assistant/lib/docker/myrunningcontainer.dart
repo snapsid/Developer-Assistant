@@ -95,6 +95,49 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
         fontSize: 16.0);
   }
 
+  stopContainer(imageid) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/docker/docker/stopcontainer.py?x=$imageid');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          loading = false;
+          getRunningContainer();
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
+  }
+
   getRunningContainer() async {
     myToast('Please Wait...', Colors.blue);
     setState(() {
@@ -273,7 +316,7 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
             icon: Icons.stop_rounded,
             onTap: () {
               setState(() {
-                // removeImage(imageId);
+                stopContainer(containerId);
               });
             },
           ),
