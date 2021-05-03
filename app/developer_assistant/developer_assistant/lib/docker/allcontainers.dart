@@ -95,6 +95,49 @@ class _DockerAllContainersState extends State<DockerAllContainers> {
         fontSize: 16.0);
   }
 
+  startContainer(imageid) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/docker/docker/startcontainer.py?x=$imageid');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          loading = false;
+          getAllContainer();
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
+  }
+
   stopContainer(imageid) async {
     myToast('Please Wait...', Colors.blue);
     setState(() {
@@ -197,7 +240,7 @@ class _DockerAllContainersState extends State<DockerAllContainers> {
       if (code == 200) {
         var body = await response.body;
         print(body);
-        myToast(body, Colors.teal);
+        // myToast(body, Colors.teal);
 
         setState(() {
           imageList = body.split('\n');
@@ -367,9 +410,11 @@ class _DockerAllContainersState extends State<DockerAllContainers> {
             icon: startStopIcon,
             onTap: () {
               setState(() {
-                if (startStopText == "STOP") {
+                if (startStopText == "START") {
+                  startContainer(containerId);
+                } else {
                   stopContainer(containerId);
-                } else {}
+                }
               });
             },
           ),
