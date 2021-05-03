@@ -441,7 +441,7 @@ class _DockerAllContainersState extends State<DockerAllContainers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Docker running containers'),
+        title: Text('All containers'),
         backgroundColor: Colors.teal,
         actions: [
           IconButton(

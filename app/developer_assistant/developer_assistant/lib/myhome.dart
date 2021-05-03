@@ -127,21 +127,7 @@ class _MyHomeState extends State<MyHome> {
           'Developer Assistant',
         ),
         backgroundColor: Colors.teal,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                print('click');
-                Fluttertoast.showToast(
-                    msg: "This is Center Short Toast",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-              }),
-        ],
+        actions: [],
       ),
       body: SafeArea(
         child: Column(
