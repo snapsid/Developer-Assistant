@@ -237,12 +237,26 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
             ),
           )),
       actions: <Widget>[
-        // IconSlideAction(
-        //   caption: 'Archive',
-        //   color: Colors.blue,
-        //   icon: Icons.archive,
-        //   onTap: () {},
-        // ),
+        Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 5, bottom: 5),
+          height: double.infinity,
+          width: double.infinity,
+          color: Colors.black45,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.code,
+                color: Colors.white,
+              ),
+              Text(
+                shell,
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ],
+          ),
+        ),
         // IconSlideAction(
         //   caption: 'Share',
         //   color: Colors.indigo,
