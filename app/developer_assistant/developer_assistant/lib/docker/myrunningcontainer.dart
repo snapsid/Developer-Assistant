@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:http/http.dart' as http;
 
 class MyRunningContainer extends StatefulWidget {
   @override
@@ -20,8 +21,66 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
   @override
   void initState() {
     ip = MyIp.ip_public;
+    getRunningContainer();
     // TODO: implement initState
     super.initState();
+  }
+
+  imageStringSplit() {
+    {
+      finalList = [];
+      // print(imageList);
+
+      // for (int i = 1; i < imageList.length - 1; i++) {
+      //   var i1 = imageList[i].toString().substring(0, 13);
+      //   var i2 = imageList[i].toString().substring(13, 23);
+      //   var i3 = imageList[i].toString().substring(23, 38);
+      //   var i4 = imageList[i].toString().substring(38, 52);
+      //   var i5 = imageList[i].toString().substring(52);
+      //
+      //   String a =
+      //       "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()}";
+      //   setState(() {
+      //     finalList.add(a);
+      //   });
+      // }
+
+      var idstart = imageList[0].toString().indexOf('CONTAINER ID');
+      var imagestart = imageList[0].toString().indexOf('IMAGE');
+      var cmdstart = imageList[0].toString().indexOf('COMMAND');
+      var createdstart = imageList[0].toString().indexOf('CREATED');
+      var statusstart = imageList[0].toString().indexOf('STATUS');
+      var portstart = imageList[0].toString().indexOf('PORTS');
+      var namesstart = imageList[0].toString().indexOf('NAMES');
+
+      for (int i = 0; i < imageList.length - 1; i++) {
+        var i1 = imageList[i].toString().substring(idstart, imagestart);
+        var i2 = imageList[i].toString().substring(imagestart, cmdstart);
+        var i3 = imageList[i].toString().substring(cmdstart, createdstart);
+        var i4 = imageList[i].toString().substring(createdstart, statusstart);
+        var i5 = imageList[i].toString().substring(statusstart, portstart);
+        var i6 = imageList[i].toString().substring(portstart, namesstart);
+        var i7 = imageList[i].toString().substring(namesstart);
+
+        String a =
+            "${i1.trimRight()} ${i2.trimRight()} ${i3.trimRight()} ${i4.trimRight()} ${i5.trimRight()} ${i6.trimRight()} ${i7.trimRight()}";
+
+        setState(() {
+          finalList.add(a);
+        });
+      }
+
+      print(finalList);
+
+      // print(finalList);
+
+      // print(imageList[1]);
+      // var i2 = imageList[1].toString().substring(13, 23);
+      // print(i2);
+
+      //  0, 7, 11,  14+15+16, 21
+      //  (0,13), (13,23),(23, 38),(38, 53)
+    }
   }
 
   myToast(mymsg, color) {
@@ -34,6 +93,51 @@ class _MyRunningContainerState extends State<MyRunningContainer> {
         textColor: Colors.white,
         webPosition: "center",
         fontSize: 16.0);
+  }
+
+  getRunningContainer() async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url =
+        Uri.parse('http://${ip}/cgi-bin/docker/docker/myrunningcontainer.py');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          imageList = body.split('\n');
+          imageStringSplit();
+          loading = false;
+          listLength = imageList.length - 2;
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
   }
 
   slidelist(index) {
