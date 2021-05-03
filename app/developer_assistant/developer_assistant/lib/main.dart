@@ -2,6 +2,7 @@ import 'package:developer_assistant/c_code.dart';
 import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/cplusplus.dart';
 import 'package:developer_assistant/cpp_output.dart';
+import 'package:developer_assistant/docker/allcontainers.dart';
 import 'package:developer_assistant/docker/dockerhome.dart';
 import 'package:developer_assistant/docker/myimage.dart';
 import 'package:developer_assistant/docker/myrunningcontainer.dart';
@@ -37,6 +38,7 @@ void main() {
       'runcontainer': (context) => DockerRunContainer(),
       'dockermyimages': (context) => MyDockerImage(),
       'myrunningcontainer': (context) => MyRunningContainer(),
+      'dockerallcontainers': (context) => DockerAllContainers(),
     },
   ));
 }

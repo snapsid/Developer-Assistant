@@ -234,7 +234,7 @@ class _DockerHomeState extends State<DockerHome> {
                         } else if (index == 4) {
                           Navigator.pushNamed(context, 'myrunningcontainer');
                         } else if (index == 5) {
-                          Navigator.pushNamed(context, 'software');
+                          Navigator.pushNamed(context, 'dockerallcontainers');
                         } else if (index == 6) {
                           print('version');
                           dockerVersion();
