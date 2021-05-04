@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:developer_assistant/ip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -87,7 +89,7 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
       child: Container(
           color: Colors.white,
           child: Container(
-            height: 120,
+            height: 150,
             // margin: EdgeInsets.only(top: 10),
             child: Card(
               elevation: 1,
@@ -100,14 +102,19 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "name",
+                          "ID: 7999416853244",
                           style: TextStyle(
                               color: Colors.teal,
-                              fontSize: 25,
+                              fontSize: 23,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'ID: ',
+                          'Size: 1',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 20),
+                        ),
+                        Text(
+                          'Type: gp2',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
@@ -120,7 +127,7 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                         margin: EdgeInsets.only(bottom: 10, right: 20),
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          'Created: ',
+                          'Availability Zone: ap-south-1a',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         )),
@@ -128,7 +135,7 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                         margin: EdgeInsets.only(top: 10, right: 20),
                         alignment: Alignment.topRight,
                         child: Text(
-                          'Version: ',
+                          'State: available',
                           style: TextStyle(
                               color: Colors.teal.shade500,
                               fontSize: 15,
@@ -199,7 +206,18 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
           IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {
-                print(getJson);
+                // print(getJson);
+
+                var x = jsonDecode(getJson);
+                List x1 = x['Volumes'];
+                var state = x1[3]['State'];
+                var size = x1[1]['Size'];
+                var zone = x1[1]['AvailabilityZone'];
+                var volumeId = x1[1]['VolumeId'];
+                var volumeType = x1[1]['VolumeType'];
+
+                var numOfVolumes = x1.length;
+                print(volumeType);
               }),
           SizedBox(
             width: 10,
