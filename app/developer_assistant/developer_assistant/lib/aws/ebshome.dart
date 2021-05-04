@@ -14,7 +14,7 @@ class _EbsHomeState extends State<EbsHome> {
   String ip;
   final List<String> titles = [
     "Create\nVolume",
-    "List\nVolume",
+    "All\nVolumes",
   ];
 
   @override
@@ -110,7 +110,7 @@ class _EbsHomeState extends State<EbsHome> {
                           print('docker service');
                           Navigator.pushNamed(context, 'ebscreatevolume');
                         } else if (index == 1) {
-                          Navigator.pushNamed(context, 'runcontainer');
+                          Navigator.pushNamed(context, 'ebsallvolumes');
                         }
                         // optional
                       },

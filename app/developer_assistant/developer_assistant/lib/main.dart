@@ -1,4 +1,5 @@
 import 'package:developer_assistant/aws/awshome.dart';
+import 'package:developer_assistant/aws/ebsallvolumes.dart';
 import 'package:developer_assistant/aws/ebscreatevolume.dart';
 import 'package:developer_assistant/aws/ebshome.dart';
 import 'package:developer_assistant/c_code.dart';
@@ -45,6 +46,7 @@ void main() {
       'awshome': (context) => MyAwsHome(),
       'ebshome': (context) => EbsHome(),
       'ebscreatevolume': (context) => EbsCreateVolume(),
+      'ebsallvolumes': (context) => EbsAllVolumes(),
     },
   ));
 }
