@@ -16,6 +16,8 @@ class _MyLinuxState extends State<MyLinux> {
   String ip;
 
   List msg = [
+    // "",
+    // "",
     "hello developer assistant",
     "hello user",
   ];
@@ -220,31 +222,52 @@ class _MyLinuxState extends State<MyLinux> {
                   padding: EdgeInsets.only(bottom: 20),
                   itemCount: msg.length,
                   itemBuilder: (BuildContext context, int index) {
-                    if (index % 2 == 0) {
-                      chatAlignment = Alignment.topRight;
-                      chatnip = BubbleNip.rightTop;
-                      bubbleMargin = BubbleEdges.only(top: 10, left: 40);
-                      chatColor = Color.fromRGBO(225, 255, 199, 1.0);
-                      chatMsgAlgn = TextAlign.right;
+                    if (index == 0) {
+                      return Bubble(
+                        margin: BubbleEdges.only(top: 15),
+                        alignment: Alignment.center,
+                        color: Color.fromRGBO(212, 234, 244, 1.0),
+                        child: Text('Developer assistant added linux',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 14.0)),
+                      );
+                    } else if (index == 1) {
+                      return Bubble(
+                        margin: BubbleEdges.only(top: 15),
+                        alignment: Alignment.center,
+                        color: Color.fromRGBO(212, 234, 244, 1.0),
+                        child: Text('Developer assistant added AI',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 14.0)),
+                      );
                     } else {
-                      chatAlignment = Alignment.topLeft;
-                      chatnip = BubbleNip.leftTop;
-                      bubbleMargin = BubbleEdges.only(top: 10, right: 40);
-                      chatColor = Colors.white70;
-                      chatMsgAlgn = TextAlign.left;
+                      if (index % 2 == 0) {
+                        chatAlignment = Alignment.topRight;
+                        chatnip = BubbleNip.rightTop;
+                        bubbleMargin = BubbleEdges.only(top: 10, left: 40);
+                        chatColor = Color.fromRGBO(225, 255, 199, 1.0);
+                        chatMsgAlgn = TextAlign.right;
+                      } else {
+                        chatAlignment = Alignment.topLeft;
+                        chatnip = BubbleNip.leftTop;
+                        bubbleMargin = BubbleEdges.only(top: 10, right: 40);
+                        chatColor = Colors.white70;
+                        chatMsgAlgn = TextAlign.left;
+                      }
+
+                      return Bubble(
+                        margin: bubbleMargin,
+                        alignment: chatAlignment,
+                        nip: chatnip,
+                        // color: Color.fromRGBO(225, 255, 199, 1.0),
+                        color: chatColor,
+                        child: Text(
+                          '${msg[index]}',
+                          style: TextStyle(fontSize: 18),
+                          textAlign: chatMsgAlgn,
+                        ),
+                      );
                     }
-                    return Bubble(
-                      margin: bubbleMargin,
-                      alignment: chatAlignment,
-                      nip: chatnip,
-                      // color: Color.fromRGBO(225, 255, 199, 1.0),
-                      color: chatColor,
-                      child: Text(
-                        '${msg[index]}',
-                        style: TextStyle(fontSize: 18),
-                        textAlign: chatMsgAlgn,
-                      ),
-                    );
                   },
                   // children: [
                   //   Bubble(
