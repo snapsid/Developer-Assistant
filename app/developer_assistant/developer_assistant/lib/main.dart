@@ -1,3 +1,5 @@
+import 'package:developer_assistant/aws/awshome.dart';
+import 'package:developer_assistant/aws/ebshome.dart';
 import 'package:developer_assistant/c_code.dart';
 import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/cplusplus.dart';
@@ -39,6 +41,8 @@ void main() {
       'dockermyimages': (context) => MyDockerImage(),
       'myrunningcontainer': (context) => MyRunningContainer(),
       'dockerallcontainers': (context) => DockerAllContainers(),
+      'awshome': (context) => MyAwsHome(),
+      'ebshome': (context) => EbsHome(),
     },
   ));
 }

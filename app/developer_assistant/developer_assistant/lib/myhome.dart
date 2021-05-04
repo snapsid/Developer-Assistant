@@ -154,7 +154,9 @@ class _MyHomeState extends State<MyHome> {
                     },
                     onSelectedItem: (index) {
                       print(index);
-                      if (index == 1) {
+                      if (index == 0) {
+                        Navigator.pushNamed(context, 'awshome');
+                      } else if (index == 1) {
                         Navigator.pushNamed(context, 'dockerhome');
                       } else if (index == 2) {
                         Navigator.pushNamed(context, 'python');
