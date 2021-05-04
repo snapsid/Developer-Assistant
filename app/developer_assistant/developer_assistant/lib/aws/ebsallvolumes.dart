@@ -213,10 +213,19 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
     var attachDetach = 'Detach';
     var attachDetachColor = Colors.redAccent.shade100;
     var attachDetachIcon = Icons.clear;
+
+    var stateColor = Colors.red;
+
     if (state == 'available') {
       attachDetach = 'Attach';
       attachDetachColor = Colors.green;
       attachDetachIcon = Icons.check;
+      stateColor = Colors.green;
+    } else {
+      attachDetach = 'Detach';
+      attachDetachColor = Colors.redAccent.shade100;
+      attachDetachIcon = Icons.clear;
+      // stateColor = Colors.red;
     }
 
     return Slidable(
@@ -273,8 +282,8 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                         child: Text(
                           'State: $state',
                           style: TextStyle(
-                              color: Colors.teal.shade500,
-                              fontSize: 15,
+                              color: stateColor,
+                              fontSize: 17,
                               fontWeight: FontWeight.w800),
                         ))
                   ],
