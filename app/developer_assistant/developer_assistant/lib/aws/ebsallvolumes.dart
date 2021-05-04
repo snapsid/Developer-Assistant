@@ -152,6 +152,49 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
     }
   }
 
+  detachVolume(volumeid) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/aws/awsservices/ebs/detachvolume.py?x=$volumeid');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          loading = false;
+          getVolumes();
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
+  }
+
   slidelist(index) {
     var x = jsonDecode(getJson);
     print("xxxxx $x");
@@ -254,24 +297,34 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
         // ),
       ],
       secondaryActions: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.only(top: 5, bottom: 5),
-          height: double.infinity,
-          width: double.infinity,
-          color: attachDetachColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                attachDetachIcon,
-                color: Colors.white,
-              ),
-              Text(
-                attachDetach,
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ],
+        InkWell(
+          onTap: () {
+            if (attachDetach == 'Attach') {
+              print('attach');
+            } else {
+              print('detach');
+              detachVolume(volumeId);
+            }
+          },
+          child: Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(top: 5, bottom: 5),
+            height: double.infinity,
+            width: double.infinity,
+            color: attachDetachColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  attachDetachIcon,
+                  color: Colors.white,
+                ),
+                Text(
+                  attachDetach,
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ],
+            ),
           ),
         ),
         Container(
