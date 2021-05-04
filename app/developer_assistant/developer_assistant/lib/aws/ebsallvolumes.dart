@@ -249,6 +249,7 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
               icon: Icon(Icons.refresh),
               onPressed: () {
                 // print(getJson);
+                getVolumes();
               }),
           SizedBox(
             width: 10,
