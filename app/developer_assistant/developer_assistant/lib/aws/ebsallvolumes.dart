@@ -167,6 +167,14 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
     // listLength = numOfVolumes;
 
     print("lisss $listLength");
+    var attachDetach = 'Detach';
+    var attachDetachColor = Colors.redAccent.shade100;
+    var attachDetachIcon = Icons.clear;
+    if (state == 'available') {
+      attachDetach = 'Attach';
+      attachDetachColor = Colors.green;
+      attachDetachIcon = Icons.check;
+    }
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -251,16 +259,16 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
           margin: EdgeInsets.only(top: 5, bottom: 5),
           height: double.infinity,
           width: double.infinity,
-          color: Colors.black45,
+          color: attachDetachColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.sd_storage,
+                attachDetachIcon,
                 color: Colors.white,
               ),
               Text(
-                "size",
+                attachDetach,
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
