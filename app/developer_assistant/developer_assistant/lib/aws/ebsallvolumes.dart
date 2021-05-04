@@ -18,6 +18,13 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
 
   String ip;
 
+  var state = "";
+  var size;
+  var zone = "";
+  var volumeId = "";
+  var volumeType = "";
+  var listLength = 0;
+
   void initState() {
     ip = MyIp.ip_public;
     // TODO: implement initState
@@ -36,6 +43,22 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
         textColor: Colors.white,
         webPosition: "center",
         fontSize: 16.0);
+  }
+
+  parseVolumeJson(index) {
+    var x = jsonDecode(getJson);
+    List x1 = x['Volumes'];
+
+    var numOfVolumes = x1.length;
+
+    state = x1[index]['State'];
+    size = x1[index]['Size'];
+    zone = x1[index]['AvailabilityZone'];
+    volumeId = x1[index]['VolumeId'];
+    volumeType = x1[index]['VolumeType'];
+    listLength = numOfVolumes;
+
+    print("lisss $listLength");
   }
 
   getVolumes() async {
@@ -61,6 +84,10 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
         setState(() {
           getJson = body;
           loading = false;
+          var x = jsonDecode(getJson);
+          print("xxxxx $x");
+          List x1 = x['Volumes'];
+          listLength = x1.length;
         });
       } else {
         print('invalid IP');
@@ -83,6 +110,21 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
   }
 
   slidelist(index) {
+    var x = jsonDecode(getJson);
+    print("xxxxx $x");
+    List x1 = x['Volumes'];
+
+    // var numOfVolumes = x1.length;
+
+    state = x1[index]['State'];
+    size = x1[index]['Size'];
+    zone = x1[index]['AvailabilityZone'];
+    volumeId = x1[index]['VolumeId'];
+    volumeType = x1[index]['VolumeType'];
+    // listLength = numOfVolumes;
+
+    print("lisss $listLength");
+
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -102,19 +144,19 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "ID: 7999416853244",
+                          "ID: $volumeId",
                           style: TextStyle(
                               color: Colors.teal,
                               fontSize: 23,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'Size: 1',
+                          'Size: $size',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
                         Text(
-                          'Type: gp2',
+                          'Type: $volumeType',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 20),
                         ),
@@ -127,15 +169,15 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
                         margin: EdgeInsets.only(bottom: 10, right: 20),
                         alignment: Alignment.bottomRight,
                         child: Text(
-                          'Availability Zone: ap-south-1a',
+                          'Availability Zone: $zone',
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
+                              fontSize: 15, fontWeight: FontWeight.w600),
                         )),
                     Container(
-                        margin: EdgeInsets.only(top: 10, right: 20),
-                        alignment: Alignment.topRight,
+                        margin: EdgeInsets.only(bottom: 30, right: 20),
+                        alignment: Alignment.bottomRight,
                         child: Text(
-                          'State: available',
+                          'State: $state',
                           style: TextStyle(
                               color: Colors.teal.shade500,
                               fontSize: 15,
@@ -207,17 +249,6 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
               icon: Icon(Icons.refresh),
               onPressed: () {
                 // print(getJson);
-
-                var x = jsonDecode(getJson);
-                List x1 = x['Volumes'];
-                var state = x1[3]['State'];
-                var size = x1[1]['Size'];
-                var zone = x1[1]['AvailabilityZone'];
-                var volumeId = x1[1]['VolumeId'];
-                var volumeType = x1[1]['VolumeType'];
-
-                var numOfVolumes = x1.length;
-                print(volumeType);
               }),
           SizedBox(
             width: 10,
@@ -244,9 +275,9 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
             // controller: scrollcontorller,
 
             padding: EdgeInsets.only(bottom: 20),
-            itemCount: 5,
+            itemCount: listLength,
             itemBuilder: (BuildContext context, int index) {
-              if (5 != 0) {
+              if (listLength != 0) {
                 return slidelist(index);
               } else {
                 return Container();
