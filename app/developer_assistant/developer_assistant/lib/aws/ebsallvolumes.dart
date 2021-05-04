@@ -109,6 +109,49 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
     }
   }
 
+  deleteVolume(volumeid) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/aws/awsservices/ebs/deletevolume.py?x=$volumeid');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          loading = false;
+          getVolumes();
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
+  }
+
   slidelist(index) {
     var x = jsonDecode(getJson);
     print("xxxxx $x");
@@ -230,7 +273,9 @@ class _EbsAllVolumesState extends State<EbsAllVolumes> {
             color: Colors.red,
             icon: Icons.delete,
             onTap: () {
-              setState(() {});
+              setState(() {
+                deleteVolume(volumeId);
+              });
             },
           ),
         )
