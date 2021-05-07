@@ -31,7 +31,7 @@ class _S3homeState extends State<S3home> {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Image.asset(
-        'assets/docker_service.png',
+        'assets/aws.png',
         fit: BoxFit.cover,
       ),
       shape: RoundedRectangleBorder(
@@ -45,7 +45,7 @@ class _S3homeState extends State<S3home> {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Image.asset(
-        'assets/run_container.png',
+        'assets/aws.png',
         fit: BoxFit.cover,
       ),
       shape: RoundedRectangleBorder(

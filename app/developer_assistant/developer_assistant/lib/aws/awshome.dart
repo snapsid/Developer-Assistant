@@ -32,7 +32,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Image.asset(
-        'assets/docker_service.png',
+        'assets/aws.png',
         fit: BoxFit.cover,
       ),
       shape: RoundedRectangleBorder(
@@ -46,7 +46,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Image.asset(
-        'assets/run_container.png',
+        'assets/aws.png',
         fit: BoxFit.cover,
       ),
       shape: RoundedRectangleBorder(
@@ -60,7 +60,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Image.asset(
-        'assets/pull_image.png',
+        'assets/aws.png',
         fit: BoxFit.cover,
       ),
       shape: RoundedRectangleBorder(
