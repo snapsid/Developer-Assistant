@@ -43,14 +43,14 @@ class _MyS3CreateBucketState extends State<MyS3CreateBucket> {
         setState(() {
           loading = false;
         });
-        // Navigator.pushNamedAndRemoveUntil(context, 'ebshome', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       } else {
         print('invalid IP');
         myToast('Invalid IP', Colors.red.shade300);
         setState(() {
           loading = false;
         });
-        // Navigator.pushNamedAndRemoveUntil(context, 'ebshome', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       }
     } catch (e) {
       print(e);
@@ -58,7 +58,7 @@ class _MyS3CreateBucketState extends State<MyS3CreateBucket> {
       setState(() {
         loading = false;
       });
-      // Navigator.pushNamedAndRemoveUntil(context, 'ebshome', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
     }
   }
 

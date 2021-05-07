@@ -4,18 +4,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
-class MyAwsHome extends StatefulWidget {
+class S3home extends StatefulWidget {
   @override
-  _MyAwsHomeState createState() => _MyAwsHomeState();
+  _S3homeState createState() => _S3homeState();
 }
 
-class _MyAwsHomeState extends State<MyAwsHome> {
+class _S3homeState extends State<S3home> {
   bool loading = false;
   String ip;
   final List<String> titles = [
-    "S3",
-    "EBS\nVolume",
-    "Security\nGroup",
+    "Create\nBucket",
+    "All\nBuckets",
   ];
 
   @override
@@ -54,20 +53,6 @@ class _MyAwsHomeState extends State<MyAwsHome> {
         borderRadius: BorderRadius.circular(40),
       ),
     ),
-    Card(
-      color: Colors.green,
-      elevation: 20,
-      semanticContainer: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Image.asset(
-        'assets/pull_image.png',
-        fit: BoxFit.cover,
-      ),
-      shape: RoundedRectangleBorder(
-        // side: BorderSide(color: Colors.white70, width: 1),
-        borderRadius: BorderRadius.circular(40),
-      ),
-    ),
   ];
 
   myToast(mymsg, color) {
@@ -86,7 +71,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AWS'),
+        title: Text('S3'),
         backgroundColor: Colors.teal,
       ),
       body: ModalProgressHUD(
@@ -122,11 +107,10 @@ class _MyAwsHomeState extends State<MyAwsHome> {
                       onSelectedItem: (index) {
                         print(index);
                         if (index == 0) {
-                          Navigator.pushNamed(context, 's3home');
+                          print('docker service');
+                          Navigator.pushNamed(context, 's3createvolume');
                         } else if (index == 1) {
-                          Navigator.pushNamed(context, 'ebshome');
-                        } else if (index == 2) {
-                          Navigator.pushNamed(context, 'pullimage');
+                          Navigator.pushNamed(context, 's3allbuckets');
                         }
                         // optional
                       },

@@ -3,6 +3,8 @@ import 'package:developer_assistant/aws/ebsallvolumes.dart';
 import 'package:developer_assistant/aws/ebscreatevolume.dart';
 import 'package:developer_assistant/aws/ebshome.dart';
 import 'package:developer_assistant/aws/s3/createbucket.dart';
+import 'package:developer_assistant/aws/s3/s3allbuckets.dart';
+import 'package:developer_assistant/aws/s3/s3home.dart';
 import 'package:developer_assistant/c_code.dart';
 import 'package:developer_assistant/c_output.dart';
 import 'package:developer_assistant/cplusplus.dart';
@@ -49,6 +51,8 @@ void main() {
       'ebscreatevolume': (context) => EbsCreateVolume(),
       'ebsallvolumes': (context) => EbsAllVolumes(),
       's3createvolume': (context) => MyS3CreateBucket(),
+      's3home': (context) => S3home(),
+      's3allbuckets': (context) => S3allbuckets(),
     },
   ));
 }
