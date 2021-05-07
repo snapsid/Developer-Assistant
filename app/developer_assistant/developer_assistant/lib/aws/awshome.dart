@@ -13,7 +13,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
   bool loading = false;
   String ip;
   final List<String> titles = [
-    "EC2",
+    "S3",
     "EBS\nVolume",
     "Security\nGroup",
   ];
@@ -122,8 +122,7 @@ class _MyAwsHomeState extends State<MyAwsHome> {
                       onSelectedItem: (index) {
                         print(index);
                         if (index == 0) {
-                          print('docker service');
-                          Navigator.pushNamed(context, 'dockerservice');
+                          Navigator.pushNamed(context, 's3createvolume');
                         } else if (index == 1) {
                           Navigator.pushNamed(context, 'ebshome');
                         } else if (index == 2) {
