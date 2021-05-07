@@ -96,6 +96,49 @@ class _S3allbucketsState extends State<S3allbuckets> {
     }
   }
 
+  deleteBucket(name) async {
+    myToast('Please Wait...', Colors.blue);
+    setState(() {
+      loading = true;
+    });
+    var url = Uri.parse(
+        'http://${ip}/cgi-bin/aws/awsservices/s3/deletebucket.py?x=$name');
+    try {
+      var response = await http.get(url, headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*"
+      });
+      var code = response.statusCode;
+      print(code);
+      if (code == 200) {
+        var body = await response.body;
+        print(body);
+        myToast(body, Colors.teal);
+
+        setState(() {
+          loading = false;
+          getBuckets();
+        });
+      } else {
+        print('invalid IP');
+        myToast('Invalid IP', Colors.red);
+        setState(() {
+          loading = false;
+        });
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, 'dockerhome', (route) => false);
+      }
+    } catch (e) {
+      print(e);
+      myToast('Server connection failed...', Colors.red);
+      setState(() {
+        loading = false;
+      });
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, 'dockerhome', (route) => false);
+    }
+  }
+
   slidelist(index) {
     print("slllllllll ${bucketList[index]}");
 
@@ -180,6 +223,7 @@ class _S3allbucketsState extends State<S3allbuckets> {
             onTap: () {
               setState(() {
                 // deleteVolume(volumeId);
+                deleteBucket(name);
               });
             },
           ),
