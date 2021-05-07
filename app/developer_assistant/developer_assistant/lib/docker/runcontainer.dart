@@ -77,8 +77,7 @@ class _DockerRunContainerState extends State<DockerRunContainer> {
           print('xdddddddddddd');
           myToast(body, Colors.red);
         } else {
-          Navigator.pushNamedAndRemoveUntil(
-              context, 'dockerhome', (route) => false);
+          Navigator.pushNamed(context, 'home');
           myToast(body, Colors.teal);
         }
       } else {
